@@ -1,16 +1,15 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-	<id>openTSDB.net</id>
+	<id>Epoch.net</id>
 	<version>$version$</version>
 	<authors>dejan@fajfar.com</authors>
 	<owners>dejan@fajfar.com</owners>
-		<iconUrl>https://raw.githubusercontent.com/dejanfajfar/openTSDB.net/master/doc/logo_200x200.png</iconUrl>
-	<projectUrl>https://github.com/dejanfajfar/openTSDB.net</projectUrl>
+	<projectUrl>https://github.com/dejanfajfar/epoch.net</projectUrl>
 	<requireLicenseAcceptance>false</requireLicenseAcceptance>
-	<summary>openTSDB client for .NET</summary>
+	<summary>Unix epoch helper for .NET</summary>
 	<description>
-		Implements a simple openTSDB client for .NET
+		Implements a simple set of helpers to handle EPOCH timestamps in .NET
 	</description>
 	</metadata>
 	<files>
