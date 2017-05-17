@@ -9,10 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epoch.net.Tests", "Epoch.ne
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{CA9E0DE1-4B2B-43BC-8018-FD520B3721D1}"
 ProjectSection(SolutionItems) = preProject
-	..\LICENSE = ..\LICENSE
-	..\README.md = ..\README.md
-	..\.gitignore = ..\.gitignore
-	..\appveyor.yml = ..\appveyor.yml
+	LICENSE = LICENSE
+	README.md = README.md
+	.gitignore = .gitignore
+	appveyor.yml = appveyor.yml
 EndProjectSection
 EndProject
 Global
