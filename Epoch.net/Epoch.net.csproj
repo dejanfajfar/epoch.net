@@ -40,6 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateTimeExtentions.cs" />
+    <Compile Include="Epoch.cs" />
+    <Compile Include="ErrorMessages.cs" />
+    <Compile Include="LongExtentions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

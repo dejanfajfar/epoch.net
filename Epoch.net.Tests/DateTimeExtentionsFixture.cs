@@ -7,17 +7,17 @@ namespace Epoch.net.Tests
     public class DateTimeExtentionsFixture
     {
         [Test]
-        public void ToUnixEpoch_After1970_Utc_DateTime()
+        public void AsEpoch_After1970_Utc_DateTime()
         {
-            var epoch = new DateTime(2015, 12, 12, 0, 0, 0, DateTimeKind.Utc).ToEpoch();
+            var epoch = new DateTime(2015, 12, 12, 0, 0, 0, DateTimeKind.Utc).AsEpoch();
 
             Assert.That(epoch, Is.EqualTo(1449878400));
         }
 
         [Test]
-        public void ToUnixEpoch_Before1970_Utc_DateTime()
+        public void AsEpoch_Before1970_Utc_DateTime()
         {
-            var epoch = new DateTime(1960, 12, 12, 0, 0, 0, DateTimeKind.Utc).ToEpoch();
+            var epoch = new DateTime(1960, 12, 12, 0, 0, 0, DateTimeKind.Utc).AsEpoch();
 
             Assert.That(epoch, Is.EqualTo(-285724800));
         }

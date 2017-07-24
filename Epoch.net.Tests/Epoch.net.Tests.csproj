@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateTimeExtentionsFixture.cs" />
+    <Compile Include="EpochFixture.cs" />
+    <Compile Include="LongextentionsFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
