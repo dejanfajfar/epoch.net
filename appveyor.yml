@@ -1,4 +1,4 @@
-version: 0.2.{build}-{branch}
+version: 0.8.{build}-{branch}
 image:
 - Visual Studio 2017
 configuration: Release
@@ -16,9 +16,3 @@ build:
   publish_nuget_symbols: true
   include_nuget_references: true
   verbosity: detailed
-deploy:
-- provider: NuGet
-  api_key:
-    secure: bC27CLQTwagax6ZX6EFu33b1NtlE7yx6Qif/GgAxcSYInH4PBrB6uIltlNVvEjvw
-  on:
-    branch: master

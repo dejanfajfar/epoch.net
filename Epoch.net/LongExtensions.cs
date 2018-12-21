@@ -3,9 +3,9 @@
 namespace Epoch.net
 {
     /// <summary>
-    /// Implements extention methods to convert long numbers into DateTime objects
+    /// Implements extension methods to convert long numbers into DateTime objects
     /// </summary>
-    public static class LongExtentions
+    public static class LongExtensions
     {
         public static DateTime AsDateTime(this long epoch)
         {
