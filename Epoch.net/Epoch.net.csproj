@@ -3,6 +3,16 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
+      <id>Epoch.net</id>
+      <version>1.0</version>
+      <authors>dejan@fajfar.com</authors>
+      <owners>dejan@fajfar.com</owners>
+      <projectUrl>https://github.com/dejanfajfar/epoch.net</projectUrl>
+      <requireLicenseAcceptance>false</requireLicenseAcceptance>
+      <summary>Unix epoch helper for .NET</summary>
+      <description>
+          Implements a simple set of helpers to handle EPOCH timestamps in .NET
+      </description>
   </PropertyGroup>
 
 </Project>
