@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
       <id>Epoch.net</id>
       <version>1.0</version>
@@ -13,6 +12,7 @@
       <description>
           Implements a simple set of helpers to handle EPOCH timestamps in .NET
       </description>
+      <TargetFrameworks>netstandard2.0;netcoreapp2.1</TargetFrameworks>
   </PropertyGroup>
 
 </Project>
