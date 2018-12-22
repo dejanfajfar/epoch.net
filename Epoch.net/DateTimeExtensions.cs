@@ -3,9 +3,9 @@
 namespace Epoch.net
 {
     /// <summary>
-    /// Implements Extention methods to convert a DateTime to an Epoch
+    /// Implements Extension methods to convert a DateTime to an Epoch
     /// </summary>
-    public static class DateTimeExtentions
+    public static class DateTimeExtensions
     {
         /// <summary>
         /// Converts the <see cref="DateTime"/> instance into an epoch integer
