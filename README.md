@@ -1,49 +1,24 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/3k10iipudlw1v9va?svg=true)](https://ci.appveyor.com/project/dejanfajfar/epoch-net)
+[![Build status](https://ci.appveyor.com/api/projects/status/3k10iipudlw1v9va/branch/master?svg=true)](https://ci.appveyor.com/project/dejanfajfar/epoch-net/branch/master)
+[![](https://img.shields.io/nuget/v/epoch.net.svg)](https://www.nuget.org/packages/Epoch.net/)
+
 # epoch.net
 
-A simple non intrusive epoch calculation thing.
+> A simple and non-intrusive library for all your epoch needs
+
+## What is an Epoch
+Epoch is shorthand for _Unix epoch time_ or as it is also known __POSIX time__.
+
+Short version: The number of seconds since 1970-01-01T00:00:00 without leap seconds.
+
+Long version: [unix time](https://en.wikipedia.org/wiki/Unix_time)
 
 ## Motivation
-In reality this is a siteproduct of the [openTSDB.net](http://github.com/dfajfar/opentsdb.net)
-project. After implementing it as part of the aforementioned project I found it to usefull to
-just be a internall code artefact.
+More an more times I had to convert between the CLIs DateTime an a epoch. 
+Because writing the same code over and over again was getting boring this little
+library was created. 
 
-# Usage
+Its sole purpose is to make the work with these unix timestamps as easy as possible.
 
-## DateTime => Epoch
-
-To get a unix epoch representation of a DateTime Object
-
-```
-var epochNow = DateTime.Now.AsEpoch();
-```
-
-or
-
-```
-var epochNow = DateTime.UtcNow.AsEpoch();
-```
-
-or
-
-
-```
-var epochNow = Epoch.Now;
-```
-
-or
-
-```
-var epochNow = new Epoch(DateTime.Now).AsEpoch;
-```
-
-## Epoch => DateTime
-
-```
-var dateTime = 0l.AsDateTime();
-```
-
-or
-
-```
-var dateTime = 0l.AsDateTime();
-```
+For this purpose this little library contains extension methods that build
+upon the existing __DateTime__.
