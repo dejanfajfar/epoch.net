@@ -2,7 +2,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/3k10iipudlw1v9va/branch/master?svg=true)](https://ci.appveyor.com/project/dejanfajfar/epoch-net/branch/master)
 [![](https://img.shields.io/nuget/v/epoch.net.svg)](https://www.nuget.org/packages/Epoch.net/)
 
-![](https://github.com/dejanfajfar/epoch.net/blob/net-stadard/images/logo_square_64.xcf?raw=true)
+![](https://github.com/dejanfajfar/epoch.net/blob/raw/net-stadard/images/logo_square_64.png?raw=true)
 
 # epoch.net
 
