@@ -2,25 +2,15 @@ using System;
 
 namespace Epoch.net
 {
-    /// <summary>
-    /// Representa an epoch timestamp and provides some additional helper methods
-    /// </summary>
     public class Epoch
     {
-        /// <summary>
-        /// Creates a new instance of the Object with the predefined unix timestamp as its value
-        /// </summary>
-        /// <param name="epoch">THe unix timestamp representig this epoch instance</param>
-        public Epoch(long epoch)
+        #region Constructors
+        
+        public Epoch(int rawEpoch)
         {
-            _epoch = epoch;
+            this.rawEpoch = rawEpoch;
         }
-
-        /// <summary>
-        /// Initializes a new instance of the 
-        /// </summary>
-        /// <param name="dateTime"></param>
-        /// <exception cref="ArgumentNullException"></exception>
+        
         public Epoch(DateTime dateTime)
         {
             if (dateTime == null)
@@ -28,30 +18,89 @@ namespace Epoch.net
                 throw new ArgumentNullException(ErrorMessages.InvalidDateTime, nameof(dateTime));
             }
 
-            _epoch = dateTime.AsEpoch();
+            rawEpoch = dateTime.ToRawEpoch();
         }
 
-        private long _epoch { get; }
+        public Epoch(Epoch epoch)
+        {
+            this.rawEpoch = epoch.ToRawEpoch();
+        }
+        #endregion
 
-        public static long Now => DateTime.UtcNow.AsEpoch();
+        private int rawEpoch;
+        
+        #region Static metehods
 
-        public static long ConvertToEpoch(DateTime dateTime)
+        public static int NowRaw => DateTime.UtcNow.ToRawEpoch();
+
+        public static Epoch Now => DateTime.UtcNow.ToEpoch();
+
+        public static int ToRawEpoch(DateTime dateTime)
         {
             if (dateTime == null)
             {
                 throw new ArgumentNullException(ErrorMessages.InvalidDateTime, nameof(dateTime));
             }
 
-            return dateTime.AsEpoch();
+            return dateTime.ToRawEpoch();
         }
 
-        public static DateTime ConvertFromEpoct(long epoch)
+        public static DateTime ToDateTime(int epoch)
         {
-            return epoch.AsDateTime();
+            return epoch.ToDateTime();
         }
 
-        public long ToEpoch => _epoch;
+        public static TimeSpan ToTimeSpan(int epoch)
+        {
+            return epoch.ToTimeSpan();
+        }
+        
+        #endregion
 
-        public DateTime ToDateTime => _epoch.AsDateTime();
+
+        public int ToRawEpoch()
+        {
+            return rawEpoch;
+        }
+
+        public DateTime ToDateTime()
+        {
+            return rawEpoch.ToDateTime();
+        }
+
+        public TimeSpan ToTimeSpan()
+        {
+            return rawEpoch.ToTimeSpan();
+        }
+        
+        #region Epoch manipulation
+
+        public Epoch AddSeconds(int seconds)
+        {
+            rawEpoch += seconds;
+            return this;
+        }
+        
+        #endregion
+        
+        #region Operators
+
+        public static Epoch operator +(Epoch operand1, Epoch operand2)
+        {
+            long epochSum = operand1.ToRawEpoch() + operand2.ToRawEpoch();
+
+            if (int.TryParse(epochSum.ToString(), out int integerEpoch))
+            {
+                return new Epoch(integerEpoch);
+            }
+            
+            throw new EpochOverflowException();
+        }
+
+        public static Epoch operator -(Epoch operand1, Epoch operand2)
+        {
+            return new Epoch(operand1.ToRawEpoch() - operand2.ToRawEpoch());
+        }
+        #endregion
     }
 }

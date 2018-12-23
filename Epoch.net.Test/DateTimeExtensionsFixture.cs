@@ -9,7 +9,7 @@ namespace Epoch.net.Test
         [TestMethod]
         public void AsEpoch_After1970_Utc_DateTime()
         {
-            var epoch = new DateTime(2015, 12, 12, 0, 0, 0, DateTimeKind.Utc).AsEpoch();
+            var epoch = new DateTime(2015, 12, 12, 0, 0, 0, DateTimeKind.Utc).ToRawEpoch();
 
             Assert.AreEqual(epoch, 1449878400);
         }
@@ -17,7 +17,7 @@ namespace Epoch.net.Test
         [TestMethod]
         public void AsEpoch_Before1970_Utc_DateTime()
         {
-            var epoch = new DateTime(1960, 12, 12, 0, 0, 0, DateTimeKind.Utc).AsEpoch();
+            var epoch = new DateTime(1960, 12, 12, 0, 0, 0, DateTimeKind.Utc).ToRawEpoch();
 
             Assert.AreEqual(epoch, -285724800);
         }
