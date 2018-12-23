@@ -7,19 +7,35 @@ namespace Epoch.net.Test
     public class DateTimeExtensionsFixture
     {
         [TestMethod]
-        public void AsEpoch_After1970_Utc_DateTime()
+        public void ToRawEpoch_After1970_Utc_DateTime()
         {
             var epoch = new DateTime(2015, 12, 12, 0, 0, 0, DateTimeKind.Utc).ToRawEpoch();
 
-            Assert.AreEqual(epoch, 1449878400);
+            Assert.AreEqual(1449878400, epoch);
         }
         
         [TestMethod]
-        public void AsEpoch_Before1970_Utc_DateTime()
+        public void ToRawEpoch_After1970_DateTime()
+        {
+            var epoch = new DateTime(2015, 12, 12, 0, 0, 0, DateTimeKind.Local).ToRawEpoch();
+
+            Assert.AreEqual(1449874800, epoch);
+        }
+        
+        [TestMethod]
+        public void ToRawEpoch_Before1970_Utc_DateTime()
         {
             var epoch = new DateTime(1960, 12, 12, 0, 0, 0, DateTimeKind.Utc).ToRawEpoch();
 
-            Assert.AreEqual(epoch, -285724800);
+            Assert.AreEqual(-285724800, epoch);
+        }
+        
+        [TestMethod]
+        public void ToRawEpoch_Before1970_DateTime()
+        {
+            var epoch = new DateTime(1960, 12, 12, 0, 0, 0, DateTimeKind.Local).ToRawEpoch();
+
+            Assert.AreEqual(-285728400, epoch);
         }
     }
 }

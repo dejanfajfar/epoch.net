@@ -29,7 +29,7 @@ namespace Epoch.net
 
         private int rawEpoch;
         
-        #region Static metehods
+        #region Static methods
 
         public static int NowRaw => DateTime.UtcNow.ToRawEpoch();
 
