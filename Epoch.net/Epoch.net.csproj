@@ -3,7 +3,7 @@
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
       <id>Epoch.net</id>
-      <version>1.0</version>
+      <Version>1.0</Version>
       <authors>dejan@fajfar.com</authors>
       <owners>dejan@fajfar.com</owners>
       <projectUrl>https://github.com/dejanfajfar/epoch.net</projectUrl>
