@@ -1,21 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <LangVersion>latest</LangVersion>
-      <id>Epoch.net</id>
-      <Version>1.0</Version>
-      <authors>dejan@fajfar.com</authors>
-      <owners>dejan@fajfar.com</owners>
-      <projectUrl>https://github.com/dejanfajfar/epoch.net</projectUrl>
-      <requireLicenseAcceptance>false</requireLicenseAcceptance>
-      <summary>Unix epoch helper for .NET</summary>
-      <description>
-          Implements a simple set of helpers to handle EPOCH timestamps in .NET
-      </description>
-      <TargetFrameworks>netstandard2.0;netcoreapp2.1</TargetFrameworks>
-    <iconUrl>https://raw.githubusercontent.com/dejanfajfar/epoch.net/net-stadard/images/logo_square_64.png</iconUrl>
-      <tags>posix unix timestamp epoch datetime timespan library core standard</tags>
-      <projectUrl>https://github.com/dejanfajfar/epoch.net</projectUrl>
-  </PropertyGroup>
+    <PropertyGroup>
+        <LangVersion>latest</LangVersion>
+        <id>Epoch.net</id>
+        <Version>1.0</Version>
+        <authors>dejan@fajfar.com</authors>
+        <owners>dejan@fajfar.com</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <summary>Unix epoch helper for .NET</summary>
+        <description>
+            Implements a simple set of helpers to handle EPOCH timestamps in .NET
+        </description>
+        <TargetFrameworks>netstandard2.0;netcoreapp2.1</TargetFrameworks>
+    </PropertyGroup>
+    
+    <PropertyGroup>
+        <PackageIconUrl>https://raw.githubusercontent.com/dejanfajfar/epoch.net/net-stadard/images/logo_square_64.png</PackageIconUrl>
+        <PackageTags>posix unix timestamp epoch datetime timespan library core standard</PackageTags>
+        <PackageProjectUrl>https://github.com/dejanfajfar/epoch.net</PackageProjectUrl>
+    </PropertyGroup>
 
 </Project>
