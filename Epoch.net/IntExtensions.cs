@@ -13,5 +13,10 @@ namespace Epoch.net
         {
             return TimeSpan.FromSeconds(epoch);
         }
+
+        public static Epoch ToEpoch(this int epoch)
+        {
+            return new Epoch(epoch);
+        }
     }
 }
