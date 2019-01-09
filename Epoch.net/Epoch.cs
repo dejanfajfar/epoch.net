@@ -2,15 +2,33 @@ using System;
 
 namespace Epoch.net
 {
+    /// <summary>
+    /// Implements and combines all Epoch helpers and provides the main entry point into the library
+    /// </summary>
+    /// <code>
+    /// var epoch = Epoch.Now
+    /// </code>
     public class Epoch
     {
         #region Constructors
         
+        /// <summary>
+        /// Creates a new instance of <see cref="Epoch"/> with a given rawEpoch
+        /// </summary>
+        /// <param name="rawEpoch">The number of seconds from 1970-01-01T00:00:00</param>
         public Epoch(int rawEpoch)
         {
             this.rawEpoch = rawEpoch;
         }
         
+        /// <summary>
+        /// Creates a new instance of <see cref="Epoch"/> with the given <see cref="DateTime"/>
+        /// </summary>
+        /// <param name="dateTime">The <see cref="DateTime"/> used to initialize the <see cref="Epoch"/></param>
+        /// <exception cref="ArgumentNullException">If the passed date time is null</exception>
+        /// <remarks>
+        ///    From the passed in DateTime only the UTC part is used
+        /// </remarks>
         public Epoch(DateTime dateTime)
         {
             if (dateTime == null)
@@ -21,8 +39,21 @@ namespace Epoch.net
             rawEpoch = dateTime.ToRawEpoch();
         }
 
+        /// <summary>
+        /// Creates a new instance of <see cref="Epoch"/> with the given <see cref="Epoch"/> instance as initilisation data
+        /// </summary>
+        /// <param name="epoch">Epoch used to initialize the instance</param>
+        /// <exception cref="ArgumentNullException">If the epoch instance is null</exception>
+        /// <remarks>
+        /// Is a simple copy constructor
+        /// </remarks>
         public Epoch(Epoch epoch)
         {
+            if (epoch == null)
+            {
+                throw new ArgumentNullException(ErrorMessages.NullEpochGiven, nameof(epoch));
+            }
+            
             this.rawEpoch = epoch.ToRawEpoch();
         }
         #endregion

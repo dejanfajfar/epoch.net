@@ -7,5 +7,7 @@ namespace Epoch.net
 
         public const string EpochOverflowFormatter =
             "The value {0} can not be stored into a int32 and is therefore invalid for an epoch";
+
+        public const string NullEpochGiven = "The provided Epoch can not be null";
     }
 }
