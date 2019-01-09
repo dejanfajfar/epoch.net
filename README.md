@@ -32,5 +32,14 @@ upon the existing __DateTime__.
 | Epoch | A wrapper object providing multiple tools to work with epoch data |
 | rawEpoch | An integer representing the seconds passed since 1970-01-01T00:00:00 without leap seconds |
 
+## Quickstart
 
+```c#
+using Epoch.net 
+
+...
+var timestamp = Epoch.NowRaw
+...
+
+```
 
