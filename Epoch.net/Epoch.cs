@@ -102,5 +102,24 @@ namespace Epoch.net
             return new Epoch(operand1.ToRawEpoch() - operand2.ToRawEpoch());
         }
         #endregion
+
+        #region Equals
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Epoch comparedEpoch)
+            {
+                return comparedEpoch.rawEpoch == rawEpoch;
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return rawEpoch;
+        }
+
+        #endregion
     }
 }
