@@ -24,3 +24,13 @@ Its sole purpose is to make the work with these unix timestamps as easy as possi
 
 For this purpose this little library contains extension methods that build
 upon the existing __DateTime__.
+
+## Glossary
+
+| Term | Description |
+|:-----|-------------:|
+| Epoch | A wrapper object providing multiple tools to work with epoch data |
+| rawEpoch | An integer representing the seconds passed since 1970-01-01T00:00:00 without leap seconds |
+
+
+
