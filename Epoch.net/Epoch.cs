@@ -62,10 +62,24 @@ namespace Epoch.net
         
         #region Static methods
 
+        /// <summary>
+        /// Gets the current UTC date in an Epoch format
+        /// </summary>
         public static int NowRaw => DateTime.UtcNow.ToRawEpoch();
 
+        /// <summary>
+        /// Gets the current LOCAL date in an Epoch format
+        /// </summary>
         public static Epoch Now => DateTime.UtcNow.ToEpoch();
 
+        /// <summary>
+        /// Converts the given <see cref="DateTime"/> to an Epoch formatted integer
+        /// </summary>
+        /// <param name="dateTime">The <see cref="DateTime"/> object to the converted</param>
+        /// <returns>An integer representing the Epoch timestamp</returns>
+        /// <exception cref="ArgumentNullException">
+        /// If the passed <see cref="DateTime"/> is null then an <see cref="ArgumentNullException"/> is thrown
+        /// </exception>
         public static int ToRawEpoch(DateTime dateTime)
         {
             if (dateTime == null)
@@ -76,11 +90,21 @@ namespace Epoch.net
             return dateTime.ToRawEpoch();
         }
 
+        /// <summary>
+        /// Converts the Epoch formatted <see cref="int"/> into a <see cref="DateTime"/>
+        /// </summary>
+        /// <param name="epoch">The epoch integer</param>
+        /// <returns>A <see cref="DateTime"/> representing the date and time described in the epoch</returns>
         public static DateTime ToDateTime(int epoch)
         {
             return epoch.ToDateTime();
         }
 
+        /// <summary>
+        /// Converts the Epoch formatted <see cref="int"/> into a <see cref="TimeSpan"/>
+        /// </summary>
+        /// <param name="epoch">The epoch integer</param>
+        /// <returns>A <see cref="TimeSpan"/> representing the timespan described in the epoch</returns>
         public static TimeSpan ToTimeSpan(int epoch)
         {
             return epoch.ToTimeSpan();
@@ -89,16 +113,28 @@ namespace Epoch.net
         #endregion
 
 
+        /// <summary>
+        /// Returns a <see cref="int"/> representation of the Epoch object
+        /// </summary>
+        /// <returns>A integer representing the UNIX time stamp</returns>
         public int ToRawEpoch()
         {
             return rawEpoch;
         }
 
+        /// <summary>
+        /// Returns a <see cref="DateTime"/> representation of the Epoch object
+        /// </summary>
+        /// <returns>A <see cref="DateTime"/> representation of the Epoch object</returns>
         public DateTime ToDateTime()
         {
             return rawEpoch.ToDateTime();
         }
 
+        /// <summary>
+        /// Returns a <see cref="TimeSpan"/> representation of the Epoch object
+        /// </summary>
+        /// <returns>A <see cref="TimeSpan"/> representation of the Epoch object</returns>
         public TimeSpan ToTimeSpan()
         {
             return rawEpoch.ToTimeSpan();
@@ -106,6 +142,14 @@ namespace Epoch.net
         
         #region Epoch manipulation
 
+        /// <summary>
+        /// Adds the provided seconds to the value of the epoch
+        /// </summary>
+        /// <param name="seconds">The seconds to add</param>
+        /// <returns>A reference to itself for chaining purposes</returns>
+        /// <remarks>
+        /// If the seconds value is negative then the seconds will be deducted from the Epoch
+        /// </remarks>
         public Epoch AddSeconds(int seconds)
         {
             rawEpoch += seconds;

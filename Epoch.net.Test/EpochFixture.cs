@@ -59,6 +59,12 @@ namespace Epoch.net.Test
             
             Assert.AreEqual(testEpoch, testObject);
         }
+
+        [TestMethod]
+        public void Ctor_NullEpoch_ArgumentNullException()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => new Epoch(null));
+        }
         
         #endregion
     }
