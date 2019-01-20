@@ -15,7 +15,7 @@
     </PropertyGroup>
     
     <PropertyGroup>
-        <PackageIconUrl>https://raw.githubusercontent.com/dejanfajfar/epoch.net/net-stadard/images/logo_square_64.png</PackageIconUrl>
+        <PackageIconUrl>https://raw.githubusercontent.com/dejanfajfar/epoch.net/master/images/logo_square_64.png</PackageIconUrl>
         <PackageTags>posix unix timestamp epoch datetime timespan library core standard</PackageTags>
         <PackageProjectUrl>https://github.com/dejanfajfar/epoch.net</PackageProjectUrl>
     </PropertyGroup>
