@@ -40,5 +40,12 @@ namespace Epoch.net.Test
 
             Assert.AreEqual(-285724800, testDate.ToRawEpoch() + offset);
         }
+
+        [TestMethod]
+        public void ToRawEpoch_FarFuture_Overflow()
+        {
+            Assert.ThrowsException<EpochOverflowException>(
+                () => new DateTime(2099, 7, 4, 0, 0, 0, DateTimeKind.Utc).ToRawEpoch());
+        }
     }
 }
