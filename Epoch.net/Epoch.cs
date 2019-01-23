@@ -80,6 +80,9 @@ namespace Epoch.net
         /// <exception cref="ArgumentNullException">
         /// If the passed <see cref="DateTime"/> is null then an <see cref="ArgumentNullException"/> is thrown
         /// </exception>
+        /// <exception cref="EpochOverflowException">
+        /// When the provided DateTime epoch representation is bigger than an integer
+        /// </exception>
         public static int ToRawEpoch(DateTime dateTime)
         {
             if (dateTime == null)
