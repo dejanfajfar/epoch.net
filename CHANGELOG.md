@@ -5,9 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [Unreleased]
-### Added
+## [1.1]
+### Fixed
 
-* _AsEpoch_ DateTime extention method
-* Epoch static class
-* _AsDateTime_ Long extention method
+* DateTime.ToRawEpoch now thrown an EpochOverflow exception if the resulting epoch is not storable in an integer
