@@ -84,7 +84,7 @@ using Epoch.net
 
 var timestamp = 1547931356;
 
-var date = new Epoch(timestamp).ToRawEpoch();
+var date = new EpochTime(timestamp).ToRawEpoch();
 ```
 
 or use the extension method on the integer
@@ -105,8 +105,8 @@ using Epoch.net
 var timestamp1 = 1540425600;
 var timestamp2 = 1547931356;
 
-var epoch1 = new Epoch(timestamp1);
-var epoch2 = new Epoch(timestamp2);
+var epoch1 = new EpochTime(timestamp1);
+var epoch2 = new EpochTime(timestamp2);
 
 var epochDif = epoch2 - epoch1;
 

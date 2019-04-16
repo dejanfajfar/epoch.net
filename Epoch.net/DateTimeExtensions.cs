@@ -15,9 +15,9 @@ namespace Epoch.net
             throw new EpochOverflowException();
         }
 
-        public static Epoch ToEpoch(this DateTime dateTime)
+        public static EpochTime ToEpoch(this DateTime dateTime)
         {
-            return new Epoch(dateTime.ToUniversalTime().ToRawEpoch());
+            return new EpochTime(dateTime.ToUniversalTime().ToRawEpoch());
         }
     }
 }

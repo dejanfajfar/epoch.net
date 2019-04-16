@@ -4,9 +4,9 @@ namespace Epoch.net
 {
     public static class TimeSpanExtensions
     {
-        public static Epoch ToEpoch(this TimeSpan timeSpan)
+        public static EpochTime ToEpoch(this TimeSpan timeSpan)
         {
-            return new Epoch(timeSpan.ToRawEpoch());
+            return new EpochTime(timeSpan.ToRawEpoch());
         }
 
         public static int ToRawEpoch(this TimeSpan timeSpan)
