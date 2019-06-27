@@ -9,11 +9,11 @@
 
 > A simple and non-intrusive library for all your epoch needs
 
-```c#
+```csharp
 using Epoch.net 
 
 ...
-var timestamp = Epoch.NowRaw
+var timestamp = EpochTime.NowRaw
 ...
 
 ```
@@ -63,15 +63,15 @@ Before you go and start looking for answers in the wiki here a few common scenar
 
 ### Convert a DateTime to a epoch timestamp
 
-```c#
+```csharp
 using Epoch.net
 
-var timestamp = Epoch.NowRaw;
+var timestamp = EpochTime.NowRaw;
 ```
 
 or use the provided extension method on the DateTime structure
 
-```c#
+```csharp
 using Epoch.net
 
 var timestamp = DateTime.Now.ToRawEpoch
@@ -79,7 +79,7 @@ var timestamp = DateTime.Now.ToRawEpoch
 
 ### Convert a epoch timestamp to a DateTime
 
-```c#
+```csharp
 using Epoch.net
 
 var timestamp = 1547931356;
@@ -89,7 +89,7 @@ var date = new EpochTime(timestamp).ToRawEpoch();
 
 or use the extension method on the integer
 
-```c#
+```csharp
 using Epoch.net
 
 var timestamp = 1547931356;
@@ -99,7 +99,7 @@ var date = timestamp.ToDateTime();
 
 ### Determine the time span between two epoch timestamps
 
-```c#
+```csharp
 using Epoch.net
 
 var timestamp1 = 1540425600;
@@ -115,7 +115,7 @@ var timeSpan = epochDif.ToTimeSpan();
 
 or we again use some provided extension methods
 
-```c#
+```csharp
 using Epoch.net
 
 var timestamp1 = 1540425600;
