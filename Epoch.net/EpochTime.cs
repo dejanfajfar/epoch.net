@@ -3,33 +3,33 @@ using System;
 namespace Epoch.net
 {
     /// <summary>
-    /// Implements and combines all Epoch helpers and provides the main entry point into the library
+    /// Implements and combines all EpochTime helpers and provides the main entry point into the library
     /// </summary>
     /// <code>
-    /// var epoch = Epoch.Now
+    /// var epoch = EpochTime.Now
     /// </code>
-    public class Epoch
+    public class EpochTime
     {
         #region Constructors
         
         /// <summary>
-        /// Creates a new instance of <see cref="Epoch"/> with a given rawEpoch
+        /// Creates a new instance of <see cref="EpochTime"/> with a given rawEpoch
         /// </summary>
         /// <param name="rawEpoch">The number of seconds from 1970-01-01T00:00:00</param>
-        public Epoch(int rawEpoch)
+        public EpochTime(int rawEpoch)
         {
             this.rawEpoch = rawEpoch;
         }
         
         /// <summary>
-        /// Creates a new instance of <see cref="Epoch"/> with the given <see cref="DateTime"/>
+        /// Creates a new instance of <see cref="EpochTime"/> with the given <see cref="DateTime"/>
         /// </summary>
-        /// <param name="dateTime">The <see cref="DateTime"/> used to initialize the <see cref="Epoch"/></param>
+        /// <param name="dateTime">The <see cref="DateTime"/> used to initialize the <see cref="EpochTime"/></param>
         /// <exception cref="ArgumentNullException">If the passed date time is null</exception>
         /// <remarks>
         ///    From the passed in DateTime only the UTC part is used
         /// </remarks>
-        public Epoch(DateTime dateTime)
+        public EpochTime(DateTime dateTime)
         {
             if (dateTime == null)
             {
@@ -40,14 +40,14 @@ namespace Epoch.net
         }
 
         /// <summary>
-        /// Creates a new instance of <see cref="Epoch"/> with the given <see cref="Epoch"/> instance as initilisation data
+        /// Creates a new instance of <see cref="EpochTime"/> with the given <see cref="EpochTime"/> instance as initilisation data
         /// </summary>
         /// <param name="epoch">Epoch used to initialize the instance</param>
         /// <exception cref="ArgumentNullException">If the epoch instance is null</exception>
         /// <remarks>
         /// Is a simple copy constructor
         /// </remarks>
-        public Epoch(Epoch epoch)
+        public EpochTime(EpochTime epoch)
         {
             if (epoch == null)
             {
@@ -70,7 +70,7 @@ namespace Epoch.net
         /// <summary>
         /// Gets the current LOCAL date in an Epoch format
         /// </summary>
-        public static Epoch Now => DateTime.UtcNow.ToEpoch();
+        public static EpochTime Now => DateTime.UtcNow.ToEpoch();
 
         /// <summary>
         /// Converts the given <see cref="DateTime"/> to an Epoch formatted integer
@@ -153,7 +153,7 @@ namespace Epoch.net
         /// <remarks>
         /// If the seconds value is negative then the seconds will be deducted from the Epoch
         /// </remarks>
-        public Epoch AddSeconds(int seconds)
+        public EpochTime AddSeconds(int seconds)
         {
             rawEpoch += seconds;
             return this;
@@ -163,21 +163,21 @@ namespace Epoch.net
         
         #region Operators
 
-        public static Epoch operator +(Epoch operand1, Epoch operand2)
+        public static EpochTime operator +(EpochTime operand1, EpochTime operand2)
         {
             long epochSum = operand1.ToRawEpoch() + operand2.ToRawEpoch();
 
             if (int.TryParse(epochSum.ToString(), out int integerEpoch))
             {
-                return new Epoch(integerEpoch);
+                return new EpochTime(integerEpoch);
             }
             
             throw new EpochOverflowException();
         }
 
-        public static Epoch operator -(Epoch operand1, Epoch operand2)
+        public static EpochTime operator -(EpochTime operand1, EpochTime operand2)
         {
-            return new Epoch(operand1.ToRawEpoch() - operand2.ToRawEpoch());
+            return new EpochTime(operand1.ToRawEpoch() - operand2.ToRawEpoch());
         }
         #endregion
 
@@ -185,7 +185,7 @@ namespace Epoch.net
 
         public override bool Equals(object obj)
         {
-            if (obj is Epoch comparedEpoch)
+            if (obj is EpochTime comparedEpoch)
             {
                 return comparedEpoch.rawEpoch == rawEpoch;
             }

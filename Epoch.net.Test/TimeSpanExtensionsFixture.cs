@@ -13,7 +13,7 @@ namespace Epoch.net.Test
 
             var testValue = testObject.ToEpoch();
             
-            Assert.AreEqual(testValue, new Epoch(500));
+            Assert.AreEqual(testValue, new EpochTime(500));
         }
 
         [TestMethod]

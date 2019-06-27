@@ -11,7 +11,7 @@ namespace Epoch.net.Test
         [TestMethod]
         public void Ctor_positive_rawEpoch_OK()
         {
-            var testObject = new Epoch(500);
+            var testObject = new EpochTime(500);
             
             Assert.AreEqual(testObject.ToRawEpoch(), 500);
         }
@@ -19,7 +19,7 @@ namespace Epoch.net.Test
         [TestMethod]
         public void Ctor_negative_rawEpoch_OK()
         {
-            var testObject = new Epoch(-500);
+            var testObject = new EpochTime(-500);
             
             Assert.AreEqual(testObject.ToRawEpoch(), -500);
         }
@@ -27,7 +27,7 @@ namespace Epoch.net.Test
         [TestMethod]
         public void Ctor_null_Exception()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new Epoch(null));
+            Assert.ThrowsException<ArgumentNullException>(() => new EpochTime(null));
         }
 
         [TestMethod]
@@ -35,7 +35,7 @@ namespace Epoch.net.Test
         {
             var dateTime = new DateTime(2015, 10,25, 0, 0, 0, DateTimeKind.Utc);
             
-            var testObject = new Epoch(dateTime);
+            var testObject = new EpochTime(dateTime);
             
             Assert.AreEqual(dateTime, testObject.ToDateTime());
         }
@@ -45,7 +45,7 @@ namespace Epoch.net.Test
         {
             var dateTime = new DateTime(2015, 10,25, 0, 0, 0, DateTimeKind.Local);
             
-            var testObject = new Epoch(dateTime);
+            var testObject = new EpochTime(dateTime);
             
             Assert.AreEqual(dateTime.ToUniversalTime(), testObject.ToDateTime());
         }
@@ -53,9 +53,9 @@ namespace Epoch.net.Test
         [TestMethod]
         public void Ctor_Epoch_OK()
         {
-            var testEpoch = new Epoch(500);
+            var testEpoch = new EpochTime(500);
             
-            var testObject = new Epoch(testEpoch);
+            var testObject = new EpochTime(testEpoch);
             
             Assert.AreEqual(testEpoch, testObject);
         }
@@ -63,7 +63,7 @@ namespace Epoch.net.Test
         [TestMethod]
         public void Ctor_NullEpoch_ArgumentNullException()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => new Epoch(null));
+            Assert.ThrowsException<ArgumentNullException>(() => new EpochTime(null));
         }
         
         #endregion
