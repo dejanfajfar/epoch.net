@@ -10,7 +10,7 @@ namespace Epoch.net.Test
         public void ToRawEpoch_After1970_Utc_DateTime()
         {
             var epoch = new DateTime(2015, 12, 12, 0, 0, 0, DateTimeKind.Utc).ToRawEpoch();
-
+            
             Assert.AreEqual(1449878400, epoch);
         }
         
@@ -21,7 +21,7 @@ namespace Epoch.net.Test
             var offset = TimeZoneInfo.Local.GetUtcOffset(testDate).ToEpoch().ToRawEpoch();
             
             
-            Assert.AreEqual(1449878400, testDate.ToRawEpoch() + offset);
+            Assert.AreEqual(1449878400, (decimal) testDate.ToRawEpoch() + offset);
         }
         
         [TestMethod]
@@ -38,7 +38,7 @@ namespace Epoch.net.Test
             var testDate = new DateTime(1960, 12, 12, 0, 0, 0, DateTimeKind.Local);
             var offset = TimeZoneInfo.Local.GetUtcOffset(testDate).ToEpoch().ToRawEpoch();
 
-            Assert.AreEqual(-285724800, testDate.ToRawEpoch() + offset);
+            Assert.AreEqual(-285724800, (decimal) testDate.ToRawEpoch() + offset);
         }
 
         [TestMethod]

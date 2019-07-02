@@ -4,6 +4,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.0]
+### Added
+
+- Decimal extensions methods
+- Double extensions methods
+- EpochTime.ShortEpoch
+- EpochTime.RawEpoch
+- EpochTime.DateTime
+- EpochTime.TimeSpan
+- EpochTime.AddHours
+- EpochTime.AddTimeSpan
+- EpochTime.ctor for decimal values
+- TimeSpanExtensions.ToShortEpoch
+- EpochValidator
+
+### Changed
+
+- The underlying value of the stored raw Epoch is changed from int to decimal
+- ```EpochTime.ToRawEpoch``` return type changed from ```ìnt``` to ```decimal```
+- TimeSpanExtensions.ToRawEpoch returns decimal instead of int
+
+### Deprecated
+
+- EpochTime.ToRawEpoch
+- EpochTime.ToDateTime
+- EpochTime.ToTimeSpan
+
 ## [2.0]
 ### Changed
 

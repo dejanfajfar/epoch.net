@@ -6,7 +6,7 @@ namespace Epoch.net
     {
         public static DateTime ToDateTime(this int epoch)
         {
-            return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(epoch);
+            return Constants.UnixEpoch.AddSeconds(epoch);
         }
 
         public static TimeSpan ToTimeSpan(this int epoch)

@@ -9,16 +9,18 @@ namespace Epoch.net
             return new EpochTime(timeSpan.ToRawEpoch());
         }
 
-        public static int ToRawEpoch(this TimeSpan timeSpan)
+        public static decimal ToRawEpoch(this TimeSpan timeSpan)
         {
             var seconds = timeSpan.TotalSeconds;
 
-            if (int.TryParse(seconds.ToString(), out int normalizedSeconds))
-            {
-                return normalizedSeconds;
-            }
-            
+            return Convert.ToDecimal(seconds);
+
             throw new EpochOverflowException(seconds.ToString());
+        }
+
+        public static int ToShortEpoch(this TimeSpan timeSpan)
+        {
+            return 1;
         }
     }
 }

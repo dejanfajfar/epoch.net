@@ -25,5 +25,15 @@ namespace Epoch.net.Test
             
             Assert.AreEqual(500, testValue);
         }
+
+        [TestMethod]
+        public void ToRawEpoch_WithDecimals_Ok()
+        {
+            var expectedValue = TimeSpan.FromSeconds(500.66);
+
+            var actualValue = expectedValue.ToRawEpoch();
+            
+            Assert.AreEqual((decimal) 500.66, actualValue);
+        }
     }
 }

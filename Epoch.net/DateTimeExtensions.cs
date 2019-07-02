@@ -4,15 +4,16 @@ namespace Epoch.net
 {
     public static class DateTimeExtensions
     {
-        public static int ToRawEpoch(this DateTime dateTime)
+        public static double ToRawEpoch(this DateTime dateTime)
         {
-            var timeSinceDisco = TimeZoneInfo.ConvertTimeToUtc(dateTime.ToUniversalTime()) - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            if (int.TryParse(timeSinceDisco.TotalSeconds.ToString(), out int rawEpoch))
+            if (!EpochValidator.isValid(dateTime))
             {
-                return rawEpoch;
+                throw new EpochOverflowException();
             }
-
-            throw new EpochOverflowException();
+                
+            var timeSinceDisco = TimeZoneInfo.ConvertTimeToUtc(dateTime.ToUniversalTime()) - Constants.UnixEpoch;
+            
+            return timeSinceDisco.TotalSeconds;
         }
 
         public static EpochTime ToEpoch(this DateTime dateTime)

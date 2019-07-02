@@ -47,7 +47,7 @@ namespace Epoch.net.Test
             
             var testObject = new EpochTime(dateTime);
             
-            Assert.AreEqual(dateTime.ToUniversalTime(), testObject.ToDateTime());
+            Assert.AreEqual(dateTime.ToUniversalTime(), testObject.DateTime);
         }
 
         [TestMethod]
