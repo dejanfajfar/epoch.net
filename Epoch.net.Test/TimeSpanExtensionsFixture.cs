@@ -33,7 +33,7 @@ namespace Epoch.net.Test
 
             var actualValue = expectedValue.ToRawEpoch();
             
-            Assert.AreEqual((decimal) 500.66, actualValue);
+            Assert.AreEqual(500.66, actualValue, 0.00000001);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using Epoch.net.Exceptions;
 
 namespace Epoch.net
 {
@@ -20,19 +21,10 @@ namespace Epoch.net
         {
             this.rawEpoch = rawEpoch;
         }
-        
-        /// <summary>
-        /// Creates a new instance of <see cref="EpochTime"/> with a given rawEpoch
-        /// </summary>
-        /// <param name="rawEpoch">The number of seconds from 1970-01-01T00:00:00</param>
-        public EpochTime(decimal rawEpoch)
-        {
-            this.rawEpoch = rawEpoch;
-        }
 
         public EpochTime(double rawEpoch)
         {
-            this.rawEpoch = (decimal) rawEpoch;
+            this.rawEpoch = rawEpoch;
         }
         
         /// <summary>
@@ -50,7 +42,7 @@ namespace Epoch.net
                 throw new ArgumentNullException(ErrorMessages.InvalidDateTime, nameof(dateTime));
             }
 
-            rawEpoch = (decimal) dateTime.ToRawEpoch();
+            rawEpoch = dateTime.ToRawEpoch();
         }
 
         /// <summary>
@@ -72,19 +64,21 @@ namespace Epoch.net
         }
         #endregion
 
-        private decimal rawEpoch;
+        private double rawEpoch;
         
         #region Static methods
 
         /// <summary>
         /// Gets the current UTC date in an Epoch format
         /// </summary>
-        public static decimal NowRaw => (decimal) DateTime.UtcNow.ToRawEpoch();
+        public static double NowRaw => DateTime.UtcNow.ToRawEpoch();
 
         /// <summary>
         /// Gets the current LOCAL date in an Epoch format
         /// </summary>
         public static EpochTime Now => DateTime.UtcNow.ToEpoch();
+
+        public static int NowShort => System.DateTime.UtcNow.ToShortEpoch();
 
         /// <summary>
         /// Converts the given <see cref="DateTime"/> to an Epoch formatted integer
@@ -135,7 +129,7 @@ namespace Epoch.net
         /// </summary>
         /// <returns>The unix timestamp</returns>
         [Obsolete("This method is deprecated, use the RawEpoch property")]
-        public decimal ToRawEpoch()
+        public double ToRawEpoch()
         {
             return rawEpoch;
         }
@@ -144,14 +138,14 @@ namespace Epoch.net
         /// Returns a <see cref="decimal"/> representation of the EpochTime object
         /// </summary>
         /// <returns>The unix timestamp</returns>
-        public decimal RawEpoch => rawEpoch;
+        public double RawEpoch => rawEpoch;
 
         /// <summary>
         /// Return a <see cref="int"/> representation of the EpochTime object
         /// </summary>
         /// <returns>The unix timestamp without milliseconds</returns>
-        /// <remarks>This is a lustful transformation where the milliseconds are lost from the epoch timestamp</remarks>
-        public int ShortEpoch => (int) rawEpoch;
+        /// <remarks>This is a lossy transformation where the milliseconds are lost from the epoch timestamp</remarks>
+        public int ShortEpoch => rawEpoch.ToShortEpoch();
 
         /// <summary>
         /// Returns a <see cref="DateTime"/> representation of the Epoch object

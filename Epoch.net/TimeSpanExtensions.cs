@@ -1,4 +1,5 @@
 using System;
+using Epoch.net.Exceptions;
 
 namespace Epoch.net
 {
@@ -9,13 +10,9 @@ namespace Epoch.net
             return new EpochTime(timeSpan.ToRawEpoch());
         }
 
-        public static decimal ToRawEpoch(this TimeSpan timeSpan)
+        public static double ToRawEpoch(this TimeSpan timeSpan)
         {
-            var seconds = timeSpan.TotalSeconds;
-
-            return Convert.ToDecimal(seconds);
-
-            throw new EpochOverflowException(seconds.ToString());
+            return timeSpan.TotalSeconds;
         }
 
         public static int ToShortEpoch(this TimeSpan timeSpan)

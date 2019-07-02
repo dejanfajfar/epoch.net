@@ -1,4 +1,5 @@
 ﻿using System;
+using Epoch.net.Exceptions;
 
 namespace Epoch.net
 {
@@ -6,18 +7,24 @@ namespace Epoch.net
     {
         public static double ToRawEpoch(this DateTime dateTime)
         {
-            if (!EpochValidator.isValid(dateTime))
-            {
-                throw new EpochOverflowException();
-            }
+            EpochValidator.Validate(dateTime);
                 
             var timeSinceDisco = TimeZoneInfo.ConvertTimeToUtc(dateTime.ToUniversalTime()) - Constants.UnixEpoch;
             
             return timeSinceDisco.TotalSeconds;
         }
 
+        public static int ToShortEpoch(this DateTime value)
+        {
+            EpochValidator.Validate(value);
+            
+            return value.ToRawEpoch().ToShortEpoch();
+        }
+
         public static EpochTime ToEpoch(this DateTime dateTime)
         {
+            EpochValidator.Validate(dateTime);
+            
             return new EpochTime(dateTime.ToUniversalTime().ToRawEpoch());
         }
     }

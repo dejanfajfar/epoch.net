@@ -27,12 +27,25 @@ namespace Epoch.net
 
         public static TimeSpan ToTimeSpan(this decimal value)
         {
-            return TimeSpan.Zero;
+            return value
+                .WholePart()
+                .ToTimeSpan()
+                .Add(new TimeSpan(0, 0, 0, 0, value.DecimalPart()));
         }
 
         public static EpochTime ToEpoch(this decimal value)
         {
-            return new EpochTime(value);
+            return new EpochTime(Convert.ToDouble(value));
+        }
+
+        public static double ToRawEpoch(this decimal value)
+        {
+            return Convert.ToDouble(value);
+        }
+
+        public static int ToShortEpoch(this decimal value)
+        {
+            return value.WholePart();
         }
     }
 }

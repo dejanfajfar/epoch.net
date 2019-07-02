@@ -17,13 +17,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - EpochTime.AddTimeSpan
 - EpochTime.ctor for decimal values
 - TimeSpanExtensions.ToShortEpoch
+- DateTimeExtensions.ToShortEpoch
 - EpochValidator
+- EpochValueException
+- EpochUnderflowException
 
 ### Changed
 
-- The underlying value of the stored raw Epoch is changed from int to decimal
-- ```EpochTime.ToRawEpoch``` return type changed from ```ìnt``` to ```decimal```
-- TimeSpanExtensions.ToRawEpoch returns decimal instead of int
+- The underlying value of the stored raw Epoch is changed from int to double
+- ```EpochTime.ToRawEpoch``` return type changed from ```ìnt``` to ```double```
+- TimeSpanExtensions.ToRawEpoch returns double instead of int
+- DateTimeExtensions.ToRawEpoch returns double instead of int
+- Moved EpochOverflowException into the Exceptions namespace
 
 ### Deprecated
 

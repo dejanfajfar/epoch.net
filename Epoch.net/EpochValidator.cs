@@ -1,22 +1,42 @@
 using System;
+using Epoch.net.Exceptions;
 
 namespace Epoch.net
 {
     public static class EpochValidator
     {
-        private const int MIN_VALUE_INT = -2147483648;
-        private const int MAX_VALUE_INT = 2147483647;
-        private static readonly DateTime MAX_VALUE_DATETIME = new DateTime(2038, 1, 13,3,14,07, DateTimeKind.Utc); // 3:14:07 Tuesday, 19 January 2038 UTC
-        private static readonly DateTime MIN_VALUE_DATETIME = new DateTime(1901, 12, 13, 20, 45, 52, DateTimeKind.Utc); // 20:45:52 Friday, 13 December 1901 UTC
-
-        public static bool isValid(int value)
+        public static bool IsValid(int value)
         {
-            return MIN_VALUE_INT <= value && value <= MAX_VALUE_INT;
+            // every int32 value is a valid unix epoch
+            return true;
         }
 
-        public static bool isValid(DateTime value)
+        public static bool IsValid(DateTime value)
         {
-            return MIN_VALUE_DATETIME <= value && value <= MAX_VALUE_DATETIME;
+            return Constants.MIN_VALUE_DATETIME <= value && value <= Constants.MAX_VALUE_DATETIME;
+        }
+
+        public static bool IsValid(decimal value)
+        {
+            return value >= Constants.MIN_VALUE_INT && value <= Constants.MAX_VALUE_INT;
+        }
+
+        public static void Validate(int value)
+        {
+            // Every int32 value is a valid unix epoch
+        }
+
+        public static void Validate(DateTime value)
+        {
+            if (value <= Constants.MIN_VALUE_DATETIME)
+            {
+                throw new EpochUnderflowException(value);
+            }
+
+            if (value >= Constants.MAX_VALUE_DATETIME)
+            {
+                throw new EpochOverflowException(value);
+            }
         }
     }
 }

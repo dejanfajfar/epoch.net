@@ -35,7 +35,12 @@ namespace Epoch.net
 
         public static EpochTime ToEpoch(this double value)
         {
-            return new EpochTime(Convert.ToDecimal(value));
+            return new EpochTime(value);
+        }
+
+        public static int ToShortEpoch(this double value)
+        {
+            return value.WholePart();
         }
     }
 }

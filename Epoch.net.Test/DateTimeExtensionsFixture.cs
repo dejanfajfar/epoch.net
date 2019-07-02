@@ -1,4 +1,5 @@
 using System;
+using Epoch.net.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Epoch.net.Test
@@ -21,7 +22,7 @@ namespace Epoch.net.Test
             var offset = TimeZoneInfo.Local.GetUtcOffset(testDate).ToEpoch().ToRawEpoch();
             
             
-            Assert.AreEqual(1449878400, (decimal) testDate.ToRawEpoch() + offset);
+            Assert.AreEqual(1449878400, testDate.ToRawEpoch() + offset);
         }
         
         [TestMethod]
@@ -38,7 +39,7 @@ namespace Epoch.net.Test
             var testDate = new DateTime(1960, 12, 12, 0, 0, 0, DateTimeKind.Local);
             var offset = TimeZoneInfo.Local.GetUtcOffset(testDate).ToEpoch().ToRawEpoch();
 
-            Assert.AreEqual(-285724800, (decimal) testDate.ToRawEpoch() + offset);
+            Assert.AreEqual(-285724800, testDate.ToRawEpoch() + offset);
         }
 
         [TestMethod]
