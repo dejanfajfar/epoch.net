@@ -20,7 +20,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - DateTimeExtensions.ToShortEpoch
 - EpochValidator
 - EpochValueException
-- EpochUnderflowException
 
 ### Changed
 
@@ -28,13 +27,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - ```EpochTime.ToRawEpoch``` return type changed from ```ìnt``` to ```double```
 - TimeSpanExtensions.ToRawEpoch returns double instead of int
 - DateTimeExtensions.ToRawEpoch returns double instead of int
-- Moved EpochOverflowException into the Exceptions namespace
 
 ### Deprecated
 
 - EpochTime.ToRawEpoch
 - EpochTime.ToDateTime
 - EpochTime.ToTimeSpan
+
+### Removed
+
+- EpochOverflowException
 
 ## [2.0]
 ### Changed

@@ -1,5 +1,4 @@
 using System;
-using Epoch.net.Exceptions;
 
 namespace Epoch.net
 {
@@ -16,9 +15,19 @@ namespace Epoch.net
             return Constants.MIN_VALUE_DATETIME <= value && value <= Constants.MAX_VALUE_DATETIME;
         }
 
+        public static bool IsValid(TimeSpan value)
+        {
+            return value != null && IsValid(value.TotalSeconds);
+        }
+
         public static bool IsValid(decimal value)
         {
-            return value >= Constants.MIN_VALUE_INT && value <= Constants.MAX_VALUE_INT;
+            return value >= Constants.MIN_VALUE_INT && value < Constants.MAX_VALUE_INT + 1m;
+        }
+
+        public static bool IsValid(double value)
+        {
+            return IsValid(Convert.ToDecimal(value));
         }
 
         public static void Validate(int value)
@@ -26,16 +35,43 @@ namespace Epoch.net
             // Every int32 value is a valid unix epoch
         }
 
+        public static void Validate(TimeSpan value)
+        {
+            if (!IsValid(value))
+            {
+                throw new EpochValueException(value);
+            }
+        }
+
         public static void Validate(DateTime value)
         {
-            if (value <= Constants.MIN_VALUE_DATETIME)
+            if (!IsValid(value))
             {
-                throw new EpochUnderflowException(value);
+                throw new EpochValueException(value);
             }
+        }
 
-            if (value >= Constants.MAX_VALUE_DATETIME)
+        public static void Validate(EpochTime value)
+        {
+            if (value == null)
             {
-                throw new EpochOverflowException(value);
+                throw new EpochValueException(value);
+            }
+        }
+
+        public static void Validate(double value)
+        {
+            if (!IsValid(value))
+            {
+                throw new EpochValueException(value);
+            }
+        }
+
+        public static void Validate(decimal value)
+        {
+            if (!IsValid(value))
+            {
+                throw new EpochValueException(value);
             }
         }
     }

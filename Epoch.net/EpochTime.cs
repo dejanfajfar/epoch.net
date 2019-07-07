@@ -1,5 +1,4 @@
 using System;
-using Epoch.net.Exceptions;
 
 namespace Epoch.net
 {
@@ -19,11 +18,19 @@ namespace Epoch.net
         /// <param name="rawEpoch">The number of seconds from 1970-01-01T00:00:00</param>
         public EpochTime(int rawEpoch)
         {
+            EpochValidator.Validate(rawEpoch);
+            
             this.rawEpoch = rawEpoch;
         }
 
+        /// <summary>
+        /// Creates a new instance of <see cref="EpochTime"/> with a given rawEpoch
+        /// </summary>
+        /// <param name="rawEpoch">The number of seconds from 1970-01-01T00:00:00</param>
         public EpochTime(double rawEpoch)
         {
+            EpochValidator.Validate(rawEpoch);
+            
             this.rawEpoch = rawEpoch;
         }
         
@@ -37,10 +44,7 @@ namespace Epoch.net
         /// </remarks>
         public EpochTime(DateTime dateTime)
         {
-            if (dateTime == null)
-            {
-                throw new ArgumentNullException(ErrorMessages.InvalidDateTime, nameof(dateTime));
-            }
+            EpochValidator.Validate(dateTime);
 
             rawEpoch = dateTime.ToRawEpoch();
         }
@@ -55,10 +59,7 @@ namespace Epoch.net
         /// </remarks>
         public EpochTime(EpochTime epoch)
         {
-            if (epoch == null)
-            {
-                throw new ArgumentNullException(ErrorMessages.NullEpochGiven, nameof(epoch));
-            }
+            EpochValidator.Validate(epoch);
             
             this.rawEpoch = epoch.ToRawEpoch();
         }
@@ -69,8 +70,11 @@ namespace Epoch.net
         #region Static methods
 
         /// <summary>
-        /// Gets the current UTC date in an Epoch format
+        /// Gets the current UTC date in a milliseconds precise Epoch
         /// </summary>
+        /// <example>
+        /// 1562531350.52
+        /// </example>
         public static double NowRaw => DateTime.UtcNow.ToRawEpoch();
 
         /// <summary>
@@ -78,27 +82,27 @@ namespace Epoch.net
         /// </summary>
         public static EpochTime Now => DateTime.UtcNow.ToEpoch();
 
+        /// <summary>
+        /// Gets the current LOCAL date in a Unix epoch format precise to the second
+        /// </summary>
+        /// <example>
+        /// 1562531350
+        /// </example>
         public static int NowShort => System.DateTime.UtcNow.ToShortEpoch();
 
         /// <summary>
         /// Converts the given <see cref="DateTime"/> to an Epoch formatted integer
         /// </summary>
         /// <param name="dateTime">The <see cref="DateTime"/> object to the converted</param>
-        /// <returns>An integer representing the Epoch timestamp</returns>
-        /// <exception cref="ArgumentNullException">
-        /// If the passed <see cref="DateTime"/> is null then an <see cref="ArgumentNullException"/> is thrown
-        /// </exception>
-        /// <exception cref="EpochOverflowException">
+        /// <returns>An double representing the Epoch timestamp</returns>
+        /// <exception cref="EpochValueException">
         /// When the provided DateTime epoch representation is bigger than an integer
         /// </exception>
-        public static decimal ToRawEpoch(DateTime dateTime)
+        public static double ToRawEpoch(DateTime dateTime)
         {
-            if (dateTime == null)
-            {
-                throw new ArgumentNullException(ErrorMessages.InvalidDateTime, nameof(dateTime));
-            }
+            EpochValidator.Validate(dateTime);
 
-            return (decimal) dateTime.ToRawEpoch();
+            return dateTime.ToRawEpoch();
         }
 
         /// <summary>
@@ -216,12 +220,9 @@ namespace Epoch.net
         {
             var epochSum = operand1.RawEpoch + operand2.RawEpoch;
 
-            if (int.TryParse(epochSum.ToString(), out int integerEpoch))
-            {
-                return new EpochTime(integerEpoch);
-            }
+            EpochValidator.Validate(epochSum);
             
-            throw new EpochOverflowException();
+            return new EpochTime(epochSum);
         }
 
         public static EpochTime operator -(EpochTime operand1, EpochTime operand2)

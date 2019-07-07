@@ -1,5 +1,4 @@
 using System;
-using Epoch.net.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Epoch.net.Test
@@ -45,7 +44,7 @@ namespace Epoch.net.Test
         [TestMethod]
         public void ToRawEpoch_FarFuture_Overflow()
         {
-            Assert.ThrowsException<EpochOverflowException>(
+            Assert.ThrowsException<EpochValueException>(
                 () => new DateTime(2099, 7, 4, 0, 0, 0, DateTimeKind.Utc).ToRawEpoch());
         }
     }

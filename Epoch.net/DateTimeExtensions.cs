@@ -1,5 +1,4 @@
 ﻿using System;
-using Epoch.net.Exceptions;
 
 namespace Epoch.net
 {
