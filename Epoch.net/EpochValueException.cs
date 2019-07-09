@@ -8,8 +8,7 @@ namespace Epoch.net
         private const string DateTimeErrorMessage = "The DateTime {0} is not in a Epoch range";
         private const string TimeStampErrorMessage = "The Timespan {0} is not in a Epoch range";
         private const string EpochTimeErrorMessage = "The EpochTime {0} is not in a Epoch range";
-        private const string DoubleErrorMessage = "The double {0} is not in a Epoch range";
-        private const string DecimalErrorMessage = "The decimal {0} is not in a Epoch range";
+
         
         
         public EpochValueException()
@@ -26,11 +25,5 @@ namespace Epoch.net
 
         public EpochValueException(EpochTime value)
             :base(string.Format(EpochTimeErrorMessage, value)){}
-
-        public EpochValueException(double value)
-            :base(string.Format(DoubleErrorMessage, value)){}
-
-        public EpochValueException(decimal value)
-            :base(string.Format(DecimalErrorMessage, value)){}
     }
 }

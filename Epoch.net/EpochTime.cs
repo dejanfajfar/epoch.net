@@ -8,8 +8,15 @@ namespace Epoch.net
     /// <code>
     /// var epoch = EpochTime.Now
     /// </code>
-    public class EpochTime
+    public sealed class EpochTime
     {
+        static EpochTime()
+        {
+            TimeProvider = new DefaultTimeProvider();
+        }
+        
+        private static ITimeProvider TimeProvider { get; set; }
+        
         #region Constructors
         
         /// <summary>
@@ -24,17 +31,6 @@ namespace Epoch.net
         }
 
         /// <summary>
-        /// Creates a new instance of <see cref="EpochTime"/> with a given rawEpoch
-        /// </summary>
-        /// <param name="rawEpoch">The number of seconds from 1970-01-01T00:00:00</param>
-        public EpochTime(double rawEpoch)
-        {
-            EpochValidator.Validate(rawEpoch);
-            
-            this.rawEpoch = rawEpoch;
-        }
-        
-        /// <summary>
         /// Creates a new instance of <see cref="EpochTime"/> with the given <see cref="DateTime"/>
         /// </summary>
         /// <param name="dateTime">The <see cref="DateTime"/> used to initialize the <see cref="EpochTime"/></param>
@@ -44,9 +40,12 @@ namespace Epoch.net
         /// </remarks>
         public EpochTime(DateTime dateTime)
         {
-            EpochValidator.Validate(dateTime);
+            if (!dateTime.IsValidEpochTime())
+            {
+                throw new EpochValueException(dateTime);
+            }
 
-            rawEpoch = dateTime.ToRawEpoch();
+            rawEpoch = dateTime.ToEpochTimestamp();
         }
 
         /// <summary>
@@ -61,154 +60,78 @@ namespace Epoch.net
         {
             EpochValidator.Validate(epoch);
             
-            this.rawEpoch = epoch.ToRawEpoch();
+            rawEpoch = epoch.Epoch;
+        }
+        
+        public EpochTime(TimeSpan timeSpan)
+        {
+            if (!timeSpan.IsValidEpochTime())
+            {
+                throw new EpochValueException(timeSpan);
+            }
+
+            rawEpoch = timeSpan.ToEpochTimestamp();
         }
         #endregion
 
-        private double rawEpoch;
-        
+        private int rawEpoch;
+
         #region Static methods
 
         /// <summary>
-        /// Gets the current UTC date in a milliseconds precise Epoch
+        /// Injects a new global thread safe <see cref="TimeProvider"/> instance to be used globally
         /// </summary>
-        /// <example>
-        /// 1562531350.52
-        /// </example>
-        public static double NowRaw => DateTime.UtcNow.ToRawEpoch();
+        /// <param name="timeProvider">The new time provider instance</param>
+        public static void SetTimeProvider(ITimeProvider timeProvider)
+        {
+            if (timeProvider != null)
+            {
+                TimeProvider = timeProvider;
+            }
+        }
+
+        /// <summary>
+        /// Resets the global time provider to the default system time provider 
+        /// </summary>
+        public static void ResetTimeProvider()
+        {
+            TimeProvider = new DefaultTimeProvider();
+        }
 
         /// <summary>
         /// Gets the current LOCAL date in an Epoch format
         /// </summary>
-        public static EpochTime Now => DateTime.UtcNow.ToEpoch();
-
-        /// <summary>
-        /// Gets the current LOCAL date in a Unix epoch format precise to the second
-        /// </summary>
-        /// <example>
-        /// 1562531350
-        /// </example>
-        public static int NowShort => System.DateTime.UtcNow.ToShortEpoch();
-
-        /// <summary>
-        /// Converts the given <see cref="DateTime"/> to an Epoch formatted integer
-        /// </summary>
-        /// <param name="dateTime">The <see cref="DateTime"/> object to the converted</param>
-        /// <returns>An double representing the Epoch timestamp</returns>
-        /// <exception cref="EpochValueException">
-        /// When the provided DateTime epoch representation is bigger than an integer
-        /// </exception>
-        public static double ToRawEpoch(DateTime dateTime)
-        {
-            EpochValidator.Validate(dateTime);
-
-            return dateTime.ToRawEpoch();
-        }
-
-        /// <summary>
-        /// Converts the Epoch formatted <see cref="int"/> into a <see cref="DateTime"/>
-        /// </summary>
-        /// <param name="epoch">The epoch integer</param>
-        /// <returns>A <see cref="DateTime"/> representing the date and time described in the epoch</returns>
-        public static DateTime ToDateTime(int epoch)
-        {
-            return epoch.ToDateTime();
-        }
-
-        /// <summary>
-        /// Converts the Epoch formatted <see cref="int"/> into a <see cref="TimeSpan"/>
-        /// </summary>
-        /// <param name="epoch">The epoch integer</param>
-        /// <returns>A <see cref="TimeSpan"/> representing the timespan described in the epoch</returns>
-        public static TimeSpan ToTimeSpan(int epoch)
-        {
-            return epoch.ToTimeSpan();
-        }
+        public static EpochTime Now => TimeProvider.UtcNow.ToEpoch();
+        
         
         #endregion
-
-
-        /// <summary>
-        /// Returns a <see cref="decimal"/> representation of the EpochTime object
-        /// </summary>
-        /// <returns>The unix timestamp</returns>
-        [Obsolete("This method is deprecated, use the RawEpoch property")]
-        public double ToRawEpoch()
-        {
-            return rawEpoch;
-        }
+        
 
         /// <summary>
         /// Returns a <see cref="decimal"/> representation of the EpochTime object
         /// </summary>
         /// <returns>The unix timestamp</returns>
-        public double RawEpoch => rawEpoch;
-
-        /// <summary>
-        /// Return a <see cref="int"/> representation of the EpochTime object
-        /// </summary>
-        /// <returns>The unix timestamp without milliseconds</returns>
-        /// <remarks>This is a lossy transformation where the milliseconds are lost from the epoch timestamp</remarks>
-        public int ShortEpoch => rawEpoch.ToShortEpoch();
+        public int Epoch => rawEpoch;
 
         /// <summary>
         /// Returns a <see cref="DateTime"/> representation of the Epoch object
         /// </summary>
         /// <returns>A <see cref="DateTime"/> representation of the Epoch object</returns>
-        [Obsolete("This method is deprecated, use the DateTime property")]
-        public DateTime ToDateTime()
-        {
-            return rawEpoch.ToDateTime();
-        }
-
-        /// <summary>
-        /// Returns a <see cref="DateTime"/> representation of the Epoch object
-        /// </summary>
-        /// <returns>A <see cref="DateTime"/> representation of the Epoch object</returns>
-        public DateTime DateTime => RawEpoch.ToDateTime();
-
-        /// <summary>
-        /// Returns a <see cref="TimeSpan"/> representation of the Epoch object
-        /// </summary>
-        /// <returns>A <see cref="TimeSpan"/> representation of the Epoch object</returns>
-        [Obsolete("This method is deprecated, use the TimeSpan property")]
-        public TimeSpan ToTimeSpan()
-        {
-            return rawEpoch.ToTimeSpan();
-        }
+        public DateTime DateTime => rawEpoch.ToDateTime();
+        
 
         /// <summary>
         /// Returns a <see cref="TimeSpan"/> representation of the EpochTime object
         /// </summary>
         /// <returns>A <see cref="TimeSpan"/> representation of the EpochTime object</returns>
-        public TimeSpan TimeSpan => RawEpoch.ToTimeSpan();
+        public TimeSpan TimeSpan => rawEpoch.ToTimeSpan();
 
         #region Epoch manipulation
 
-        /// <summary>
-        /// Adds the provided seconds to the value of the epoch
-        /// </summary>
-        /// <param name="seconds">The seconds to add</param>
-        /// <returns>A reference to itself for chaining purposes</returns>
-        /// <remarks>
-        /// If the seconds value is negative then the seconds will be deducted from the Epoch
-        /// </remarks>
-        public EpochTime AddSeconds(int seconds)
+        public EpochTime Add(TimeSpan span)
         {
-            rawEpoch += seconds;
-            return this;
-        }
-
-        public EpochTime AddHours(int hours)
-        {
-            rawEpoch += hours * 3600;
-            return this;
-        }
-
-        public EpochTime AddTimeSpan(TimeSpan span)
-        {
-            var newSpan = RawEpoch.ToTimeSpan() + span;
-            this.rawEpoch = newSpan.ToRawEpoch();
+            var newSpan = this.TimeSpan + span;
+            rawEpoch = newSpan.ToEpochTimestamp();
             return this;
         }
         
@@ -218,8 +141,8 @@ namespace Epoch.net
 
         public static EpochTime operator +(EpochTime operand1, EpochTime operand2)
         {
-            var epochSum = operand1.RawEpoch + operand2.RawEpoch;
-
+            var epochSum = operand1.Epoch + operand2.Epoch;
+            
             EpochValidator.Validate(epochSum);
             
             return new EpochTime(epochSum);
@@ -227,7 +150,7 @@ namespace Epoch.net
 
         public static EpochTime operator -(EpochTime operand1, EpochTime operand2)
         {
-            return new EpochTime(operand1.RawEpoch - operand2.RawEpoch);
+            return new EpochTime(operand1.Epoch - operand2.Epoch);
         }
         #endregion
 
@@ -237,7 +160,7 @@ namespace Epoch.net
         {
             if (obj is EpochTime comparedEpoch)
             {
-                return comparedEpoch.RawEpoch == RawEpoch;
+                return comparedEpoch.Epoch == Epoch;
             }
 
             return false;
@@ -245,7 +168,7 @@ namespace Epoch.net
 
         public override int GetHashCode()
         {
-            return (int) RawEpoch;
+            return Epoch;
         }
 
         #endregion

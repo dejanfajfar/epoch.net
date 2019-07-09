@@ -18,5 +18,15 @@ namespace Epoch.net
         {
             return new EpochTime(epoch);
         }
+
+        public static LongEpochTime ToLongEpochTime(this int epoch)
+        {
+            return new LongEpochTime(epoch.ToLongEpochTimestamp());
+        }
+
+        public static long ToLongEpochTimestamp(this int epoch)
+        {
+            return epoch * 1000;
+        }
     }
 }

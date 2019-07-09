@@ -7,36 +7,25 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [3.0]
 ### Added
 
-- Decimal extensions methods
 - Double extensions methods
 - EpochTime.ShortEpoch
 - EpochTime.RawEpoch
 - EpochTime.DateTime
 - EpochTime.TimeSpan
-- EpochTime.AddHours
-- EpochTime.AddTimeSpan
-- EpochTime.ctor for decimal values
-- TimeSpanExtensions.ToShortEpoch
-- DateTimeExtensions.ToShortEpoch
+- EpochTime.Add
 - EpochValidator
 - EpochValueException
-
-### Changed
-
-- The underlying value of the stored raw Epoch is changed from int to double
-- ```EpochTime.ToRawEpoch``` return type changed from ```ìnt``` to ```double```
-- TimeSpanExtensions.ToRawEpoch returns double instead of int
-- DateTimeExtensions.ToRawEpoch returns double instead of int
-
-### Deprecated
-
-- EpochTime.ToRawEpoch
-- EpochTime.ToDateTime
-- EpochTime.ToTimeSpan
+- ITimeProvider
+- DefaultTimeProvider
+- LongEpochTime
 
 ### Removed
 
 - EpochOverflowException
+- EpochTime.AddSeconds
+- EpochTime.ToRawEpoch
+- EpochTime.ToDateTime
+- EpochTime.ToTimeSpan
 
 ## [2.0]
 ### Changed

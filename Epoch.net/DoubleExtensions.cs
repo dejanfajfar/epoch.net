@@ -32,15 +32,5 @@ namespace Epoch.net
                 .ToTimeSpan()
                 .Add(new TimeSpan(0, 0, 0, 0, value.DecimalPart()));
         }
-
-        public static EpochTime ToEpoch(this double value)
-        {
-            return new EpochTime(value);
-        }
-
-        public static int ToShortEpoch(this double value)
-        {
-            return value.WholePart();
-        }
     }
 }

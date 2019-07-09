@@ -4,27 +4,43 @@ namespace Epoch.net
 {
     public static class DateTimeExtensions
     {
-        public static double ToRawEpoch(this DateTime dateTime)
+        public static long ToLongEpochTimestamp(this DateTime dateTime)
         {
-            EpochValidator.Validate(dateTime);
-                
             var timeSinceDisco = TimeZoneInfo.ConvertTimeToUtc(dateTime.ToUniversalTime()) - Constants.UnixEpoch;
             
-            return timeSinceDisco.TotalSeconds;
+            return Convert.ToInt64(timeSinceDisco.TotalMilliseconds);
         }
 
-        public static int ToShortEpoch(this DateTime value)
+        public static int ToEpochTimestamp(this DateTime dateTime)
         {
-            EpochValidator.Validate(value);
+            if (!dateTime.IsValidEpochTime())
+            {
+                throw new EpochValueException(dateTime);
+            }
             
-            return value.ToRawEpoch().ToShortEpoch();
+            var timeSinceDisco = TimeZoneInfo.ConvertTimeToUtc(dateTime.ToUniversalTime()) - Constants.UnixEpoch;
+            
+            return Convert.ToInt32(timeSinceDisco.TotalSeconds);
         }
 
         public static EpochTime ToEpoch(this DateTime dateTime)
         {
-            EpochValidator.Validate(dateTime);
+            if (!dateTime.IsValidEpochTime())
+            {
+                throw new EpochValueException(dateTime);
+            }
             
-            return new EpochTime(dateTime.ToUniversalTime().ToRawEpoch());
+            return new EpochTime(dateTime);
+        }
+
+        public static LongEpochTime ToLongEpochTime(this DateTime dateTime)
+        {
+            return new LongEpochTime(dateTime);
+        }
+
+        public static bool IsValidEpochTime(this DateTime dateTime)
+        {
+            return dateTime >= Constants.MIN_VALUE_DATETIME && dateTime <= Constants.MAX_VALUE_DATETIME;
         }
     }
 }
