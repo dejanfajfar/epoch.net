@@ -22,7 +22,7 @@ namespace Epoch.net.Test
             Assert.AreEqual(After1970_UTC_Timestamp, After1970_UTC.ToEpochTimestamp());
             Assert.AreEqual(Before1970_UTC_Timestamp, Before1970_UTC.ToEpochTimestamp());
             
-            Assert.ThrowsException<EpochValueException>(
+            Assert.ThrowsException<EpochTimeValueException>(
                 () => OutOfBounds.ToEpochTimestamp());
         }
         
@@ -38,8 +38,8 @@ namespace Epoch.net.Test
         [TestMethod]
         public void ToEpoch_UTC()
         {
-            Assert.AreEqual(After1970_UTC_Timestamp, After1970_UTC.ToEpoch().Epoch);
-            Assert.AreEqual(Before1970_UTC_Timestamp, Before1970_UTC.ToEpoch().Epoch);
+            Assert.AreEqual(After1970_UTC_Timestamp, After1970_UTC.ToEpochTime().Epoch);
+            Assert.AreEqual(Before1970_UTC_Timestamp, Before1970_UTC.ToEpochTime().Epoch);
         }
 
         [TestMethod]
@@ -47,8 +47,8 @@ namespace Epoch.net.Test
         {
             var offset = TimeZoneInfo.Local.GetUtcOffset(After1970).ToEpochTime().Epoch;
             
-            Assert.AreEqual(After1970_UTC_Timestamp, After1970.ToEpoch().Epoch + offset);
-            Assert.AreEqual(Before1970_UTC_Timestamp, Before1970.ToEpoch().Epoch + offset);
+            Assert.AreEqual(After1970_UTC_Timestamp, After1970.ToEpochTime().Epoch + offset);
+            Assert.AreEqual(Before1970_UTC_Timestamp, Before1970.ToEpochTime().Epoch + offset);
         }
 
         [TestMethod]

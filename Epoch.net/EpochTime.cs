@@ -24,9 +24,7 @@ namespace Epoch.net
         /// </summary>
         /// <param name="rawEpoch">The number of seconds from 1970-01-01T00:00:00</param>
         public EpochTime(int rawEpoch)
-        {
-            EpochValidator.Validate(rawEpoch);
-            
+        {   
             this.rawEpoch = rawEpoch;
         }
 
@@ -42,7 +40,7 @@ namespace Epoch.net
         {
             if (!dateTime.IsValidEpochTime())
             {
-                throw new EpochValueException(dateTime);
+                throw new EpochTimeValueException(dateTime);
             }
 
             rawEpoch = dateTime.ToEpochTimestamp();
@@ -58,7 +56,10 @@ namespace Epoch.net
         /// </remarks>
         public EpochTime(EpochTime epoch)
         {
-            EpochValidator.Validate(epoch);
+            if (epoch == null)
+            {
+                throw new ArgumentNullException(nameof(epoch), "The provided epoch can not be null");
+            }
             
             rawEpoch = epoch.Epoch;
         }
@@ -67,7 +68,7 @@ namespace Epoch.net
         {
             if (!timeSpan.IsValidEpochTime())
             {
-                throw new EpochValueException(timeSpan);
+                throw new EpochTimeValueException(timeSpan);
             }
 
             rawEpoch = timeSpan.ToEpochTimestamp();
@@ -101,7 +102,7 @@ namespace Epoch.net
         /// <summary>
         /// Gets the current LOCAL date in an Epoch format
         /// </summary>
-        public static EpochTime Now => TimeProvider.UtcNow.ToEpoch();
+        public static EpochTime Now => TimeProvider.UtcNow.ToEpochTime();
         
         
         #endregion
@@ -141,15 +142,25 @@ namespace Epoch.net
 
         public static EpochTime operator +(EpochTime operand1, EpochTime operand2)
         {
-            var epochSum = operand1.Epoch + operand2.Epoch;
+            var epochSum = operand1.Epoch + (long)operand2.Epoch;
+
+            if (!epochSum.IsValidEpochTimestamp())
+            {
+                throw new EpochTimeValueException(epochSum);
+            }
             
-            EpochValidator.Validate(epochSum);
-            
-            return new EpochTime(epochSum);
+            return new EpochTime(Convert.ToInt32(epochSum));
         }
 
         public static EpochTime operator -(EpochTime operand1, EpochTime operand2)
         {
+            var epochSub = operand1.Epoch - (long) operand2.Epoch;
+
+            if (!epochSub.IsValidEpochTimestamp())
+            {
+                throw new EpochTimeValueException(epochSub);
+            }
+            
             return new EpochTime(operand1.Epoch - operand2.Epoch);
         }
         #endregion

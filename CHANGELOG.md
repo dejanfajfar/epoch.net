@@ -14,10 +14,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - EpochTime.TimeSpan
 - EpochTime.Add
 - EpochValidator
-- EpochValueException
+- EpochTimeValueException
 - ITimeProvider
 - DefaultTimeProvider
 - LongEpochTime
+- Long extensions methods
 
 ### Removed
 

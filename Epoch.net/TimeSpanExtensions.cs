@@ -15,7 +15,7 @@ namespace Epoch.net
 
             if (!timeSpan.IsValidEpochTime())
             {
-                throw new EpochValueException(timeSpan);
+                throw new EpochTimeValueException(timeSpan);
             }
 
             return Convert.ToInt32(totalSeconds);
@@ -32,7 +32,7 @@ namespace Epoch.net
 
             if (!timeSpan.IsValidLongEpochTime())
             {
-                throw new EpochValueException(timeSpan);
+                throw new LongEpochTimeValueException(timeSpan);
             }
 
             return Convert.ToInt64(totalMilliseconds);

@@ -14,7 +14,7 @@ namespace Epoch.net
             return TimeSpan.FromSeconds(epoch);
         }
 
-        public static EpochTime ToEpoch(this int epoch)
+        public static EpochTime ToEpochTime(this int epoch)
         {
             return new EpochTime(epoch);
         }
@@ -26,7 +26,7 @@ namespace Epoch.net
 
         public static long ToLongEpochTimestamp(this int epoch)
         {
-            return epoch * 1000;
+            return epoch * 1000l;
         }
     }
 }

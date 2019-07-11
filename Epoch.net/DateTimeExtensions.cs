@@ -15,7 +15,7 @@ namespace Epoch.net
         {
             if (!dateTime.IsValidEpochTime())
             {
-                throw new EpochValueException(dateTime);
+                throw new EpochTimeValueException(dateTime);
             }
             
             var timeSinceDisco = TimeZoneInfo.ConvertTimeToUtc(dateTime.ToUniversalTime()) - Constants.UnixEpoch;
@@ -23,11 +23,11 @@ namespace Epoch.net
             return Convert.ToInt32(timeSinceDisco.TotalSeconds);
         }
 
-        public static EpochTime ToEpoch(this DateTime dateTime)
+        public static EpochTime ToEpochTime(this DateTime dateTime)
         {
             if (!dateTime.IsValidEpochTime())
             {
-                throw new EpochValueException(dateTime);
+                throw new EpochTimeValueException(dateTime);
             }
             
             return new EpochTime(dateTime);
