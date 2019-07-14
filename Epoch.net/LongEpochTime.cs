@@ -4,6 +4,14 @@ namespace Epoch.net
 {
     public sealed class LongEpochTime
     {
+        private static ITimeProvider timeProvider;
+
+        static LongEpochTime()
+        {
+            timeProvider = new DefaultTimeProvider();            
+        }
+        
+        #region Constructors
         public LongEpochTime(DateTime dateTime)
         {
             rawEpoch = dateTime.ToLongEpochTimestamp();
@@ -43,11 +51,60 @@ namespace Epoch.net
 
             rawEpoch = epochTime.Epoch.ToLongEpochTimestamp();
         }
+        
+        #endregion
 
         private long rawEpoch { get; set; }
+        
+        #region Static methods
 
+        public static void SetTimeProvider(ITimeProvider timeProvider)
+        {
+            if (timeProvider != null)
+            {
+                LongEpochTime.timeProvider = timeProvider;
+            }
+        }
+
+        public static void ResetTimeProvider()
+        {
+            timeProvider = new DefaultTimeProvider();
+        }
+
+        public static LongEpochTime Now => timeProvider.UtcNow.ToLongEpochTime();
+
+        #endregion
+        
+        #region Public methods
+        
         public long Epoch => rawEpoch;
 
+        public DateTime DateTime => rawEpoch.ToDateTime();
+
+        public TimeSpan TimeSpan => rawEpoch.ToTimeSpan();
+
+        #endregion
+        
+        #region Operators
+
+        public static LongEpochTime operator +(LongEpochTime operator1, LongEpochTime operator2)
+        {
+            // todo: There is a open issue with long number overflow
+            
+            return new LongEpochTime(operator1 + operator2);
+        }
+
+        public static LongEpochTime operator -(LongEpochTime operator1, LongEpochTime operator2)
+        {
+            //todo: There is a open issue with long number underflow
+            
+            return new LongEpochTime(operator1 - operator2);
+        }
+        
+        #endregion
+        
+        #region Overriden methods
+        
         public override int GetHashCode()
         {
             return rawEpoch.GetHashCode();
@@ -62,5 +119,7 @@ namespace Epoch.net
 
             return false;
         }
+        
+        #endregion
     }
 }

@@ -8,9 +8,7 @@ namespace Epoch.net
         private const string DateTimeErrorMessage = "The DateTime {0} is not in a Epoch range";
         private const string TimeStampErrorMessage = "The Timespan {0} is not in a Epoch range";
         private const string EpochTimeErrorMessage = "The EpochTime {0} is not in a Epoch range";
-        private const string LongErrorMessage = "{0}";
-
-        
+        private const string LongErrorMessage = "The number {0} is not in a Epoch range";
         
         public EpochTimeValueException()
             : base(DefaultErrorMessage){}
