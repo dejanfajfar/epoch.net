@@ -83,6 +83,13 @@ namespace Epoch.net
 
         public TimeSpan TimeSpan => rawEpoch.ToTimeSpan();
 
+        public LongEpochTime Add(TimeSpan timeSpan)
+        {
+            var newSpan = TimeSpan + timeSpan;
+            rawEpoch = newSpan.ToLongEpochTimestamp();
+            return this;
+        }
+
         #endregion
         
         #region Operators
@@ -91,14 +98,14 @@ namespace Epoch.net
         {
             // todo: There is a open issue with long number overflow
             
-            return new LongEpochTime(operator1 + operator2);
+            return new LongEpochTime(operator1.Epoch + operator2.Epoch);
         }
 
         public static LongEpochTime operator -(LongEpochTime operator1, LongEpochTime operator2)
         {
             //todo: There is a open issue with long number underflow
             
-            return new LongEpochTime(operator1 - operator2);
+            return new LongEpochTime(operator1.Epoch - operator2.Epoch);
         }
         
         #endregion

@@ -3,24 +3,24 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Epoch.net.Test
 {
     [TestClass]
-    public class EpochTime_Static_Fixture
+    public class LongEpochTime_Static_Fixture
     {
         [TestInitialize]
         public void SetUp()
         {
-            EpochTime.SetTimeProvider(new FakeTimeProvider());
+            LongEpochTime.SetTimeProvider(new FakeTimeProvider());
         }
 
         [TestCleanup]
         public void TearDown()
         {
-            EpochTime.ResetTimeProvider();
+            LongEpochTime.ResetTimeProvider();
         }
-
+        
         [TestMethod]
         public void Now()
         {
-            Assert.AreEqual(FakeTimeProvider.EPOCH_TIMESTAMP, EpochTime.Now.Epoch);
+            Assert.AreEqual(FakeTimeProvider.LONG_EPOCH_TIMESTAMP, LongEpochTime.Now.Epoch);
         }
     }
 }
