@@ -26,7 +26,7 @@ namespace Epoch.net.Test
         [TestMethod]
         public void ToDateTime()
         {
-            Assert.AreEqual(Constants.UnixEpoch, 0l.ToDateTime());
+            Assert.AreEqual(Constants.UnixEpoch, 0L.ToDateTime());
             
             Assert.AreEqual(PositiveDateTime, PositiveLongEpochTimestamp.ToDateTime());
             Assert.AreEqual(NegativeDateTime, NegativeLongEpochTimestamp.ToDateTime());
@@ -35,7 +35,7 @@ namespace Epoch.net.Test
         [TestMethod]
         public void ToTimeSpan()
         {
-            Assert.AreEqual(TimeSpan.Zero, 0l.ToTimeSpan());
+            Assert.AreEqual(TimeSpan.Zero, 0L.ToTimeSpan());
             
             Assert.AreEqual(TimeSpan.FromMilliseconds(PositiveLongEpochTimestamp), PositiveLongEpochTimestamp.ToTimeSpan());
             Assert.AreEqual(TimeSpan.FromMilliseconds(NegativeLongEpochTimestamp), NegativeLongEpochTimestamp.ToTimeSpan());
@@ -44,7 +44,7 @@ namespace Epoch.net.Test
         [TestMethod]
         public void ToEpochTimestamp()
         {
-            Assert.AreEqual(0, 0l.ToEpochTimestamp());
+            Assert.AreEqual(0, 0L.ToEpochTimestamp());
             
             Assert.AreEqual(Constants.MAX_VALUE_INT, ((long)Constants.MAX_VALUE_INT * 1000).ToEpochTimestamp());
             Assert.AreEqual(Constants.MIN_VALUE_INT, ((long)Constants.MIN_VALUE_INT * 1000).ToEpochTimestamp());

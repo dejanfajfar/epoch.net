@@ -14,7 +14,7 @@ namespace Epoch.net.Test
         [TestMethod]
         public void Long()
         {
-            Assert.AreEqual(0l, new LongEpochTime(0l).Epoch);
+            Assert.AreEqual(0L, new LongEpochTime(0L).Epoch);
             
             Assert.AreEqual(ValidLongEpochTimestamp, new LongEpochTime(ValidLongEpochTimestamp).Epoch);
         }
@@ -22,7 +22,7 @@ namespace Epoch.net.Test
         [TestMethod]
         public void TimeSpan()
         {
-            Assert.AreEqual(0l, new LongEpochTime(System.TimeSpan.Zero).Epoch);
+            Assert.AreEqual(0L, new LongEpochTime(System.TimeSpan.Zero).Epoch);
             
             Assert.AreEqual(ValidLongEpochTimestamp, new LongEpochTime(System.TimeSpan.FromMilliseconds(ValidLongEpochTimestamp)).Epoch);
 
@@ -33,7 +33,7 @@ namespace Epoch.net.Test
         [TestMethod]
         public void DateTime()
         {
-            Assert.AreEqual(0l, new LongEpochTime(Constants.UnixEpoch).Epoch);
+            Assert.AreEqual(0L, new LongEpochTime(Constants.UnixEpoch).Epoch);
             
             Assert.AreEqual(ValidLongEpochTimestamp, new LongEpochTime(ValidDateTime).Epoch);
         }

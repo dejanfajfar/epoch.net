@@ -26,7 +26,7 @@ namespace Epoch.net
 
         public static long ToLongEpochTimestamp(this int epoch)
         {
-            return epoch * 1000l;
+            return epoch * 1000L;
         }
     }
 }
