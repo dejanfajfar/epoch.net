@@ -2,6 +2,9 @@ using System;
 
 namespace Epoch.net
 {
+    /// <summary>
+    /// Implements a millisecond precise 
+    /// </summary>
     public sealed class LongEpochTime
     {
         private static ITimeProvider timeProvider;

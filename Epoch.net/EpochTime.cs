@@ -3,11 +3,8 @@ using System;
 namespace Epoch.net
 {
     /// <summary>
-    /// Implements and combines all EpochTime helpers and provides the main entry point into the library
+    /// Implements a to the second precise unix timestamp
     /// </summary>
-    /// <code>
-    /// var epoch = EpochTime.Now
-    /// </code>
     public sealed class EpochTime
     {
         static EpochTime()
@@ -32,9 +29,11 @@ namespace Epoch.net
         /// Creates a new instance of <see cref="EpochTime"/> with the given <see cref="DateTime"/>
         /// </summary>
         /// <param name="dateTime">The <see cref="DateTime"/> used to initialize the <see cref="EpochTime"/></param>
-        /// <exception cref="ArgumentNullException">If the passed date time is null</exception>
+        /// <exception cref="ArgumentNullException">
+        /// If the passed <see cref="DateTime"/> is outside of the valid Epoch range
+        /// </exception>
         /// <remarks>
-        ///    From the passed in DateTime only the UTC part is used
+        ///    The given <see cref="DateTime"/> is converted to UTC according to the environment settings
         /// </remarks>
         public EpochTime(DateTime dateTime)
         {
@@ -47,9 +46,9 @@ namespace Epoch.net
         }
 
         /// <summary>
-        /// Creates a new instance of <see cref="EpochTime"/> with the given <see cref="EpochTime"/> instance as initilisation data
+        /// Creates a new instance of <see cref="EpochTime"/> with the given <see cref="EpochTime"/> instance as initialisation data
         /// </summary>
-        /// <param name="epoch">Epoch used to initialize the instance</param>
+        /// <param name="epoch"><see cref="EpochTime"/> used to initialize the instance</param>
         /// <exception cref="ArgumentNullException">If the epoch instance is null</exception>
         /// <remarks>
         /// Is a simple copy constructor
@@ -64,6 +63,13 @@ namespace Epoch.net
             rawEpoch = epoch.Epoch;
         }
         
+        /// <summary>
+        /// Creates a new instance of <see cref="EpochTime"/> with the given <see cref="TimeSpan"/> as a offset from 1970-01-01T00:00Z
+        /// </summary>
+        /// <param name="timeSpan">The <see cref="TimeSpan"/> representing the offset from 1970-01-01T00:00Z</param>
+        /// <exception cref="EpochTimeValueException">
+        /// If the offset would put the <see cref="EpochTime"/> outside of the valid Epoch range
+        /// </exception>
         public EpochTime(TimeSpan timeSpan)
         {
             if (!timeSpan.IsValidEpochTime())
@@ -100,7 +106,7 @@ namespace Epoch.net
         }
 
         /// <summary>
-        /// Gets the current LOCAL date in an Epoch format
+        /// Gets the current UTC date and time as an <see cref="EpochTime"/>
         /// </summary>
         public static EpochTime Now => TimeProvider.UtcNow.ToEpochTime();
         
@@ -109,26 +115,34 @@ namespace Epoch.net
         
 
         /// <summary>
-        /// Returns a <see cref="decimal"/> representation of the EpochTime object
+        /// Returns a <see cref="int"/> representation of the <see cref="EpochTime"/> instance
         /// </summary>
-        /// <returns>The unix timestamp</returns>
+        /// <returns>The seconds accurate Epoch</returns>
         public int Epoch => rawEpoch;
 
         /// <summary>
-        /// Returns a <see cref="DateTime"/> representation of the Epoch object
+        /// Returns a <see cref="DateTime"/> representation of the <see cref="EpochTime"/> instance
         /// </summary>
-        /// <returns>A <see cref="DateTime"/> representation of the Epoch object</returns>
+        /// <returns>A <see cref="DateTime"/> representation of the <see cref="EpochTime"/> instance</returns>
         public DateTime DateTime => rawEpoch.ToDateTime();
         
 
         /// <summary>
-        /// Returns a <see cref="TimeSpan"/> representation of the EpochTime object
+        /// Returns a <see cref="TimeSpan"/> representation of the <see cref="EpochTime"/> instance
         /// </summary>
-        /// <returns>A <see cref="TimeSpan"/> representation of the EpochTime object</returns>
+        /// <returns>A <see cref="TimeSpan"/> representation of the <see cref="EpochTime"/> instance</returns>
         public TimeSpan TimeSpan => rawEpoch.ToTimeSpan();
 
         #region Epoch manipulation
 
+        /// <summary>
+        /// Applies the given <see cref="TimeSpan"/> offset to the <see cref="EpochTime"/> instance
+        /// </summary>
+        /// <param name="span">The <see cref="TimeSpan"/> offset to apply</param>
+        /// <returns>The updated <see cref="EpochTime"/> instance</returns>
+        /// <remarks>
+        ///  The method returns an updated <see cref="EpochTime"/> but also updates the calling instance
+        /// </remarks>
         public EpochTime Add(TimeSpan span)
         {
             var newSpan = this.TimeSpan + span;
@@ -167,6 +181,7 @@ namespace Epoch.net
 
         #region Equals
 
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if (obj is EpochTime comparedEpoch)
@@ -177,6 +192,7 @@ namespace Epoch.net
             return false;
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             return Epoch;
