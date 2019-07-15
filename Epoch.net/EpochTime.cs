@@ -115,9 +115,8 @@ namespace Epoch.net
         
 
         /// <summary>
-        /// Returns a <see cref="int"/> representation of the <see cref="EpochTime"/> instance
+        /// Gets a <see cref="int"/> representation of the <see cref="EpochTime"/> instance
         /// </summary>
-        /// <returns>The seconds accurate Epoch</returns>
         public int Epoch => rawEpoch;
 
         /// <summary>
