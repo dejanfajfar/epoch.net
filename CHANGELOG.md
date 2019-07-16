@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [3.0]
 ### Added
 
-- Double extensions methods
+- LongEpochTime
 - EpochTime.ShortEpoch
 - EpochTime.RawEpoch
 - EpochTime.DateTime
@@ -17,7 +17,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - EpochTimeValueException
 - ITimeProvider
 - DefaultTimeProvider
-- LongEpochTime
 - Long extensions methods
 
 ### Removed
