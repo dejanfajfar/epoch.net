@@ -46,5 +46,11 @@ namespace Epoch.net.Test
         {
             Assert.AreEqual(ValidEpochTimestamp - 1, ValidEpochTime.Add(System.TimeSpan.FromSeconds(-1)).Epoch);
         }
+
+        [TestMethod]
+        public void ToString()
+        {
+            Assert.AreEqual(ValidEpochTimestamp.ToString(), ValidEpochTime.ToString());
+        }
     }
 }

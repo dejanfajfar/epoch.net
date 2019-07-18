@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [3.1]
+### Added
+
+- LongEpochTime ToString method
+- EpochTime ToString method
 
 ## [3.0]
 ### Added

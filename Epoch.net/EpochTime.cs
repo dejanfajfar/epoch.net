@@ -197,6 +197,12 @@ namespace Epoch.net
             return Epoch;
         }
 
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return Epoch.ToString();
+        }
+
         #endregion
     }
 }
