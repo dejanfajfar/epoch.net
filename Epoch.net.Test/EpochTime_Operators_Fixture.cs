@@ -7,8 +7,8 @@ namespace Epoch.net.Test
     public class EpochTime_Operators_Fixture
     {
         private readonly EpochTime Valid_EpochTime = new EpochTime(500);
-        private readonly EpochTime Max_EpochTime = new EpochTime(int.MaxValue);
-        private readonly EpochTime Min_EpochTime = new EpochTime(int.MinValue);
+        private readonly EpochTime Max_EpochTime = new EpochTime(Constants.MAX_VALUE_INT);
+        private readonly EpochTime Min_EpochTime = new EpochTime(Constants.MIN_VALUE_INT);
         
         [TestMethod]
         public void Addition()

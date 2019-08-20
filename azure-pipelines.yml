@@ -1,0 +1,19 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: 'build'
+    projects: 'Epoch.net/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  displayName: Run tests
+  inputs:
+    command: 'test'
+    projects: '**/*Test/*.csproj'
+    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'

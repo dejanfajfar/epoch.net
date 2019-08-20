@@ -4,10 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.1]
+### Added
+
+- LongEpochTime ToString method
+- EpochTime ToString method
+
 ## [3.0]
 ### Added
 
-- Double extensions methods
+- LongEpochTime
 - EpochTime.ShortEpoch
 - EpochTime.RawEpoch
 - EpochTime.DateTime
@@ -17,7 +23,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - EpochTimeValueException
 - ITimeProvider
 - DefaultTimeProvider
-- LongEpochTime
 - Long extensions methods
 
 ### Removed
