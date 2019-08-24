@@ -2,7 +2,7 @@ trigger:
 - master
 
 variables:
-  version: 3.1.$(rev:.r)
+  version: 3.1
 
 pool:
   vmImage: 'ubuntu-latest'
