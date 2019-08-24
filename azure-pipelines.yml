@@ -1,20 +1,25 @@
 trigger:
 - master
 
+variables:
+  version: 3.1.$(rev:.r)
+
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
 - task: DotNetCoreCLI@2
-  displayName: Build
   inputs:
     command: 'build'
     projects: 'Epoch.net/*.csproj'
+    arguments: '-p:Version=$(version)'
 - task: NuGetCommand@2
   inputs:
     command: 'pack'
     packagesToPack: '**/Epoch.net.csproj'
-    versioningScheme: 'byBuildNumber'
+    configuration: 'Release'
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'version'
     includeSymbols: true
 - task: DotNetCoreCLI@2
   displayName: Run tests
