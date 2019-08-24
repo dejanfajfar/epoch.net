@@ -14,8 +14,8 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: '**/Epoch.net.csproj'
-    versioningScheme: 'off'
-    arguments: '--configuration $(buildConfiguration)'
+    versioningScheme: 'byBuildNumber'
+    includeSymbols: true
 - task: DotNetCoreCLI@2
   displayName: Run tests
   inputs:
