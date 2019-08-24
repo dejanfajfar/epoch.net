@@ -9,21 +9,24 @@ pool:
 
 steps:
 - task: DotNetCoreCLI@2
+  displayName: Build solution
   inputs:
     command: 'build'
     projects: 'Epoch.net/*.csproj'
     arguments: '-p:Version=$(version)'
-- task: NuGetCommand@2
-  inputs:
-    command: 'pack'
-    packagesToPack: '**/Epoch.net.csproj'
-    configuration: 'Release'
-    versioningScheme: 'byEnvVar'
-    versionEnvVar: 'version'
-    includeSymbols: true
 - task: DotNetCoreCLI@2
   displayName: Run tests
   inputs:
     command: 'test'
     projects: '**/*Test/*.csproj'
-    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+    arguments: '--configuration $(buildConfiguration)'
+    testRunTitle: 'Run Tests'
+- task: DotNetCoreCLI@2
+  displayName: Create nuget package
+  inputs:
+    command: 'pack'
+    packagesToPack: 'Epoch.net/*.csproj'
+    nobuild: true
+    includesymbols: true
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'version'
