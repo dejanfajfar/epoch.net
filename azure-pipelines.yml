@@ -10,6 +10,11 @@ steps:
   inputs:
     command: 'build'
     projects: 'Epoch.net/*.csproj'
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/Epoch.net.csproj'
+    versioningScheme: 'off'
     arguments: '--configuration $(buildConfiguration)'
 - task: DotNetCoreCLI@2
   displayName: Run tests
