@@ -1,6 +1,8 @@
 trigger:
 - master
 
+variables:
+  version: 3.1.$(rev:.r)
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -11,7 +13,7 @@ steps:
   inputs:
     command: 'build'
     projects: 'Epoch.net/*.csproj'
-    arguments: '-p:Version=$(version_number)'
+    arguments: '-p:Version=$(version)'
 - task: DotNetCoreCLI@2
   displayName: Run tests
   inputs:
@@ -27,7 +29,7 @@ steps:
     nobuild: true
     includesymbols: true
     versioningScheme: 'byEnvVar'
-    versionEnvVar: 'version_number'
+    versionEnvVar: 'version'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
