@@ -1,4 +1,4 @@
-name: $(BuildDefinitionName)-$(Rev:.r)
+name: $(version)-$(Rev:.r)
 
 trigger:
 - master
@@ -15,7 +15,7 @@ steps:
   inputs:
     command: 'build'
     projects: 'Epoch.net/*.csproj'
-    arguments: '-p:Version=$(version)'
+    arguments: '-p:Version=$(Build.BuildNumber)'
 - task: DotNetCoreCLI@2
   displayName: Run tests
   inputs:
@@ -31,7 +31,7 @@ steps:
     nobuild: true
     includesymbols: true
     versioningScheme: 'byEnvVar'
-    versionEnvVar: 'version'
+    versionEnvVar: 'Build.BuildNumber'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
