@@ -1,4 +1,4 @@
-name: $(version)-$(Rev:.r)
+name: $(version)$(Rev:.r)
 
 trigger:
 - master
