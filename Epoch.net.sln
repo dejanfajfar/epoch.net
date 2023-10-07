@@ -1,20 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.0.0
-MinimumVisualStudioVersion = 10.0.0.1
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{CA9E0DE1-4B2B-43BC-8018-FD520B3721D1}"
-ProjectSection(SolutionItems) = preProject
-	LICENSE = LICENSE
-	README.md = README.md
-	.gitignore = .gitignore
-	appveyor.yml = appveyor.yml
-	CHANGELOG.md = CHANGELOG.md
-EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		CHANGELOG.md = CHANGELOG.md
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epoch.net", "Epoch.net\Epoch.net.csproj", "{FB0FC0E9-E1BC-41CC-BEA1-5F02AE48C82A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epoch.net", "Epoch.net\Epoch.net.csproj", "{FB0FC0E9-E1BC-41CC-BEA1-5F02AE48C82A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epoch.net.Test", "Epoch.net.Test\Epoch.net.Test.csproj", "{CEB262D9-E177-4198-B7E4-9EB826C87F5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epoch.net.Test", "Epoch.net.Test\Epoch.net.Test.csproj", "{CEB262D9-E177-4198-B7E4-9EB826C87F5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,5 +32,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0527CA42-47FA-41B0-A885-83B2F34FECA1}
 	EndGlobalSection
 EndGlobal
