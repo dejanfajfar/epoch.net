@@ -1,9 +1,8 @@
 using System;
 
-namespace Epoch.net
+namespace Epoch.net;
+
+public interface ITimeProvider
 {
-    public interface ITimeProvider
-    {
-        DateTime UtcNow { get; }
-    }
+    DateTime UtcNow { get; }
 }

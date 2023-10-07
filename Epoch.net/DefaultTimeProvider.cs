@@ -1,9 +1,8 @@
 using System;
 
-namespace Epoch.net
+namespace Epoch.net;
+
+public class DefaultTimeProvider : ITimeProvider
 {
-    public class DefaultTimeProvider : ITimeProvider
-    {
-        public DateTime UtcNow => DateTime.UtcNow;
-    }
+    public DateTime UtcNow => DateTime.UtcNow;
 }
