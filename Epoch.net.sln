@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{CA9E0DE1-4
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		CHANGELOG.md = CHANGELOG.md
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
@@ -14,6 +15,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epoch.net", "Epoch.net\Epoch.net.csproj", "{FB0FC0E9-E1BC-41CC-BEA1-5F02AE48C82A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epoch.net.Test", "Epoch.net.Test\Epoch.net.Test.csproj", "{CEB262D9-E177-4198-B7E4-9EB826C87F5A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildPipelines", "BuildPipelines", "{19F6A183-4FA2-4184-A65D-B89EC4869EF6}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +38,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{19F6A183-4FA2-4184-A65D-B89EC4869EF6} = {CA9E0DE1-4B2B-43BC-8018-FD520B3721D1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0527CA42-47FA-41B0-A885-83B2F34FECA1}
