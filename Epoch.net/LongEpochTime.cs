@@ -7,7 +7,7 @@ namespace Epoch.net;
 /// </summary>
 public sealed class LongEpochTime
 {
-    private static ITimeProvider timeProvider;
+    private static IDateTimeProvider timeProvider;
 
     static LongEpochTime()
     {
@@ -95,7 +95,7 @@ public sealed class LongEpochTime
     /// Injects a new global thread safe <see cref="TimeProvider"/> instance to be used globally
     /// </summary>
     /// <param name="timeProvider">The new time provider instance</param>
-    public static void SetTimeProvider(ITimeProvider timeProvider)
+    public static void SetTimeProvider(IDateTimeProvider timeProvider)
     {
         if (timeProvider != null)
         {

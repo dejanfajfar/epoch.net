@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 
 namespace Epoch.net;
 
@@ -12,7 +13,7 @@ public sealed class EpochTime
         TimeProvider = new DefaultTimeProvider();
     }
     
-    private static ITimeProvider TimeProvider { get; set; }
+    private static IDateTimeProvider TimeProvider { get; set; }
     
     #region Constructors
     
@@ -89,7 +90,7 @@ public sealed class EpochTime
     /// Injects a new global thread safe <see cref="TimeProvider"/> instance to be used globally
     /// </summary>
     /// <param name="timeProvider">The new time provider instance</param>
-    public static void SetTimeProvider(ITimeProvider timeProvider)
+    public static void SetTimeProvider(IDateTimeProvider timeProvider)
     {
         if (timeProvider != null)
         {

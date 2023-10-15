@@ -2,7 +2,7 @@ using System;
 
 namespace Epoch.net.Test
 {
-    public class FakeTimeProvider : ITimeProvider
+    public class FakeTimeProvider : IDateTimeProvider
     {
         public const long LONG_EPOCH_TIMESTAMP = 1430906878051;
         public const int EPOCH_TIMESTAMP = 1430906878;
