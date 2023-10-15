@@ -48,7 +48,7 @@ namespace Epoch.net.Test
         }
 
         [TestMethod]
-        public void ToString()
+        public void ToString_Tests()
         {
             Assert.AreEqual(ValidEpochTimestamp.ToString(), ValidEpochTime.ToString());
         }
