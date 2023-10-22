@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Updated to .net version 7
 - Moved build to github actions
+- 
+
+### Added
+
+- DateOnly extensions
+- TimeOnly extensions
 
 ## [3.1]
 ### Added

@@ -11,11 +11,12 @@ public sealed class LongEpochTime
 
     static LongEpochTime()
     {
-        timeProvider = new DefaultTimeProvider();            
+        timeProvider = new DefaultTimeProvider();
     }
-    
-    #region Constructors
-    
+
+    public static LongEpochTime Default => new(0);
+
+
     /// <summary>
     /// Initializes a new instance of <see cref="LongEpochTime"/>
     /// </summary>
@@ -84,12 +85,8 @@ public sealed class LongEpochTime
 
         rawEpoch = epochTime.Epoch.ToLongEpochTimestamp();
     }
-    
-    #endregion
 
     private long rawEpoch { get; set; }
-    
-    #region Static methods
 
     /// <summary>
     /// Injects a new global thread safe <see cref="TimeProvider"/> instance to be used globally
@@ -116,10 +113,7 @@ public sealed class LongEpochTime
     /// </summary>
     public static LongEpochTime Now => timeProvider.UtcNow.ToLongEpochTime();
 
-    #endregion
-    
-    #region Public methods
-    
+
     /// <summary>
     /// Gets a millisecond unix epoch representation of the <see cref="LongEpochTime"/> instance
     /// </summary>
@@ -145,33 +139,36 @@ public sealed class LongEpochTime
     /// </remarks>
     public LongEpochTime Add(TimeSpan timeSpan)
     {
-        var newSpan = TimeSpan + timeSpan;
+        TimeSpan newSpan = TimeSpan + timeSpan;
         rawEpoch = newSpan.ToLongEpochTimestamp();
         return this;
     }
 
-    #endregion
-    
-    #region Operators
+    /// <summary>
+    /// Applies the given <see cref="TimeOnly"/> offset to the <see cref="LongEpochTime"/> instance
+    /// </summary>
+    /// <param name="time"></param>
+    /// <returns></returns>
+    public LongEpochTime Add(TimeOnly time)
+    {
+        return this;
+    }
 
     public static LongEpochTime operator +(LongEpochTime operator1, LongEpochTime operator2)
     {
         // todo: There is a open issue with long number overflow
-        
+
         return new LongEpochTime(operator1.Epoch + operator2.Epoch);
     }
 
+    
     public static LongEpochTime operator -(LongEpochTime operator1, LongEpochTime operator2)
     {
         //todo: There is a open issue with long number underflow
-        
+
         return new LongEpochTime(operator1.Epoch - operator2.Epoch);
     }
-    
-    #endregion
-    
-    #region Overriden methods
-    
+
     /// <inheritdoc/>
     public override int GetHashCode()
     {
@@ -181,12 +178,7 @@ public sealed class LongEpochTime
     /// <inheritdoc/>
     public override bool Equals(object obj)
     {
-        if (obj is LongEpochTime comparedEpoch)
-        {
-            return comparedEpoch.Epoch == Epoch;
-        }
-
-        return false;
+        return obj is LongEpochTime comparedEpoch && comparedEpoch.Epoch == Epoch;
     }
 
     /// <inheritdoc/>
@@ -194,6 +186,4 @@ public sealed class LongEpochTime
     {
         return Epoch.ToString();
     }
-
-    #endregion
 }

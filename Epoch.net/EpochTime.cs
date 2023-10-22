@@ -1,5 +1,4 @@
 using System;
-using System.Numerics;
 
 namespace Epoch.net;
 
@@ -12,17 +11,17 @@ public sealed class EpochTime
     {
         TimeProvider = new DefaultTimeProvider();
     }
-    
+
     private static IDateTimeProvider TimeProvider { get; set; }
-    
+
     #region Constructors
-    
+
     /// <summary>
     /// Creates a new instance of <see cref="EpochTime"/> with a given rawEpoch
     /// </summary>
     /// <param name="rawEpoch">The number of seconds from 1970-01-01T00:00:00</param>
     public EpochTime(int rawEpoch)
-    {   
+    {
         this.rawEpoch = rawEpoch;
     }
 
@@ -60,10 +59,10 @@ public sealed class EpochTime
         {
             throw new ArgumentNullException(nameof(epoch), "The provided epoch can not be null");
         }
-        
+
         rawEpoch = epoch.Epoch;
     }
-    
+
     /// <summary>
     /// Creates a new instance of <see cref="EpochTime"/> with the given <see cref="TimeSpan"/> as a offset from 1970-01-01T00:00Z
     /// </summary>
@@ -110,10 +109,10 @@ public sealed class EpochTime
     /// Gets the current UTC date and time as an <see cref="EpochTime"/>
     /// </summary>
     public static EpochTime Now => TimeProvider.UtcNow.ToEpochTime();
-    
-    
+
+
     #endregion
-    
+
 
     /// <summary>
     /// Gets a <see cref="int"/> representation of the <see cref="EpochTime"/> instance
@@ -123,15 +122,23 @@ public sealed class EpochTime
     /// <summary>
     /// Returns a <see cref="DateTime"/> representation of the <see cref="EpochTime"/> instance
     /// </summary>
-    /// <returns>A <see cref="DateTime"/> representation of the <see cref="EpochTime"/> instance</returns>
     public DateTime DateTime => rawEpoch.ToDateTime();
-    
+
 
     /// <summary>
     /// Returns a <see cref="TimeSpan"/> representation of the <see cref="EpochTime"/> instance
     /// </summary>
-    /// <returns>A <see cref="TimeSpan"/> representation of the <see cref="EpochTime"/> instance</returns>
     public TimeSpan TimeSpan => rawEpoch.ToTimeSpan();
+
+    /// <summary>
+    /// Returns a <see cref="DateOnly"/> representation of the <see cref="EpochTime"/> instance
+    /// </summary>
+    public DateOnly DateOnly => DateOnly.FromDateTime(rawEpoch.ToDateTime());
+
+    /// <summary>
+    /// Returns a <see cref="TimeOnly"/> representation of the <see cref="EpochTime"/> instance
+    /// </summary>
+    public TimeOnly TimeOnly => TimeOnly.FromDateTime(rawEpoch.ToDateTime());
 
     #region Epoch manipulation
 
@@ -149,9 +156,9 @@ public sealed class EpochTime
         rawEpoch = newSpan.ToEpochTimestamp();
         return this;
     }
-    
+
     #endregion
-    
+
     #region Operators
 
     public static EpochTime operator +(EpochTime operand1, EpochTime operand2)
@@ -162,19 +169,19 @@ public sealed class EpochTime
         {
             throw new EpochTimeValueException(epochSum);
         }
-        
+
         return new EpochTime(Convert.ToInt32(epochSum));
     }
 
     public static EpochTime operator -(EpochTime operand1, EpochTime operand2)
     {
-        var epochSub = operand1.Epoch - (long) operand2.Epoch;
+        var epochSub = operand1.Epoch - (long)operand2.Epoch;
 
         if (!epochSub.IsValidEpochTimestamp())
         {
             throw new EpochTimeValueException(epochSub);
         }
-        
+
         return new EpochTime(operand1.Epoch - operand2.Epoch);
     }
     #endregion
