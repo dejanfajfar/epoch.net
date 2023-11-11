@@ -4,7 +4,7 @@
 
 ![](https://raw.githubusercontent.com/dejanfajfar/epoch.net/master/images/logo.png)
 
-# epoch.net
+# 👋 Introduction
 
 > A simple and non-intrusive library for all your epoch needs
 
@@ -17,15 +17,7 @@ var timestamp = EpochTime.Now;
 
 ```
 
-# v3 breaking changes
-
-with the new v3 some breaking changes have happened!
-
-Methods were replaced by properties and the Error Types have changed.
-
-If something is too broken please feel free to scream at me in the chat: [![Gitter](https://img.shields.io/gitter/room/dejanfajfar/epoch.net.svg)](https://gitter.im/dejanfajfar/epoch.net)
-
-## What is an Epoch
+## 🤔 What is an Epoch
 Epoch is shorthand for _Unix epoch time_ or as it is also known __POSIX time__.
 
 Short version: The number of seconds since __1970-01-01T00:00:00Z__ without leap seconds.
@@ -42,7 +34,7 @@ Its sole purpose is to make the work with these unix timestamps as easy as possi
 
 For this purpose this library contains extension methods that build upon the existing __DateTime__, __TimeSpan__, __int__ and __long__ types.
 
-## Glossary
+# 📖 Glossary
 
 | Term | Description |
 |:-----|-------------:|
@@ -51,16 +43,16 @@ For this purpose this library contains extension methods that build upon the exi
 | LongEpochTime | Represents a POSIX time instance exact to the _millisecond_ |
 | LongEpochTimestamp | The number of milliseconds since 1970-01-01T00:00Z |
 
-### Difference between EpochTime and LongEpochTime
+## Difference between _EpochTime_ and _LongEpochTime_
 
 The initial difference was precision. _EpochTime_ will only be accurate to the nearest second on the other hand _LongEpochTime_ is accurate to the millisecond.
 From this precision difference I decided to differentiate then by their __underlying__ base type.
 
-_EpochTime_ is based on __int32__ / _int_
+`EpochTime` is based on `int32` / `int`
 
-_LongEpochTime_ is based on __int64__ / _long_  
+`LongEpochTime` is based on `int64` / `long`  
 
-> This is sadly implies that if you get a POSIX timestamp from somewhere you, the developer, have to know if it is representing milliseconds or seconds!
+> ❗This is sadly implies that if you get a POSIX timestamp from somewhere you, the developer, have to know if it is representing milliseconds or seconds!
 
 ## Ranges
 
@@ -69,20 +61,19 @@ _LongEpochTime_ is based on __int64__ / _long_
 | EpochTimestamp | -2147483648 | 2147483647 |
 | LongEpochTimestamp | -922337203685477 | 922337203685477 |
 
-_Note:_ The range of the __LongEpochTimestamp__ and __LongEpoch__ is theoretically limited only by the range of _int64_.
-If left like this some timestamps could not be represented by the __TimeSpan__ structure.
+_📝 Note:_ The range of the `LongEpoch` is theoretically limited only by the range of `int64`.
 
-## Installation
+# 👨‍🔬 Installation
 
-Installation is simple as installing any other __nuget package__ 
+The preferred way of integrating the library is to use the [nuget package](https://www.nuget.org/packages/Epoch.net). This is easily done be either: 
 
-```bash
+```shell
 dotnet add package Epoch.net
 ```
 
 or
 
-```bash
+```shell
 Install-Package Epoch.net
 ```
 
