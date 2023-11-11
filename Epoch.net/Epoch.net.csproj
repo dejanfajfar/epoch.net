@@ -11,13 +11,14 @@
         <description>
             Implements a simple set of helpers to handle EPOCH timestamps in .NET
         </description>
-        <TargetFrameworks>netstandard2.0;netcoreapp2.1</TargetFrameworks>
+        <TargetFrameworks>net7.0;net6.0;net48</TargetFrameworks>
     </PropertyGroup>
     
     <PropertyGroup>
         <PackageIconUrl>https://raw.githubusercontent.com/dejanfajfar/epoch.net/master/images/logo_square_64.png</PackageIconUrl>
         <PackageTags>posix unix timestamp epoch datetime timespan library core standard</PackageTags>
         <PackageProjectUrl>https://github.com/dejanfajfar/epoch.net</PackageProjectUrl>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
     </PropertyGroup>
 
 </Project>

@@ -19,8 +19,8 @@ namespace Epoch.net.Test
             Assert.AreEqual(After_1970_DateTime, After_1970_EpochTimestamp.ToDateTime());
             Assert.AreEqual(Before_1970_DateTime, Before_1970_EpochTimestamp.ToDateTime());
             
-            Assert.AreEqual(Constants.MAX_VALUE_DATETIME, Constants.MAX_VALUE_INT.ToDateTime());
-            Assert.AreEqual(Constants.MIN_VALUE_DATETIME, Constants.MIN_VALUE_INT.ToDateTime());
+            Assert.AreEqual(EpochTime.MAX_DATETIME, EpochTime.MAX_VALUE.ToDateTime());
+            Assert.AreEqual(EpochTime.MIN_DATETIME, EpochTime.MIN_VALUE.ToDateTime());
         }
 
         [TestMethod]

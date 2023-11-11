@@ -15,6 +15,8 @@ namespace Epoch.net.Test
         public void Long()
         {
             Assert.AreEqual(0L, new LongEpochTime(0L).Epoch);
+
+            Assert.AreEqual(LongEpochTime.Default, new LongEpochTime(LongEpochTime.DefaultDateTime));
             
             Assert.AreEqual(ValidLongEpochTimestamp, new LongEpochTime(ValidLongEpochTimestamp).Epoch);
         }
@@ -26,20 +28,20 @@ namespace Epoch.net.Test
             
             Assert.AreEqual(ValidLongEpochTimestamp, new LongEpochTime(System.TimeSpan.FromMilliseconds(ValidLongEpochTimestamp)).Epoch);
 
-            Assert.AreEqual(Constants.MAX_VALUE_LONG, new LongEpochTime(System.TimeSpan.MaxValue).Epoch);
-            Assert.AreEqual(Constants.MIN_VALUE_LONG, new LongEpochTime(System.TimeSpan.MinValue).Epoch);
+            Assert.AreEqual(LongEpochTime.MAX, new LongEpochTime(System.TimeSpan.MaxValue));
+            Assert.AreEqual(LongEpochTime.MIN, new LongEpochTime(System.TimeSpan.MinValue));
         }
 
         [TestMethod]
         public void DateTime()
         {
-            Assert.AreEqual(0L, new LongEpochTime(Constants.UnixEpoch).Epoch);
+            Assert.AreEqual(0L, LongEpochTime.Default.Epoch);
             
             Assert.AreEqual(ValidLongEpochTimestamp, new LongEpochTime(ValidDateTime).Epoch);
         }
 
         [TestMethod]
-        public void LongEpochTime()
+        public void LongEpochTimeTest()
         {
             Assert.AreEqual(ValidLongEpochTimestamp, new LongEpochTime(ValidLongEpochTime).Epoch);
         }

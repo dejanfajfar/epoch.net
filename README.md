@@ -1,8 +1,5 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/3k10iipudlw1v9va?svg=true)](https://ci.appveyor.com/project/dejanfajfar/epoch-net)
-[![Build status](https://ci.appveyor.com/api/projects/status/3k10iipudlw1v9va/branch/master?svg=true)](https://ci.appveyor.com/project/dejanfajfar/epoch-net/branch/master)
-[![](https://img.shields.io/nuget/v/epoch.net.svg)](https://www.nuget.org/packages/Epoch.net/)
-![](https://img.shields.io/nuget/dt/epoch.net.svg)
-[![Gitter](https://img.shields.io/gitter/room/dejanfajfar/epoch.net.svg)](https://gitter.im/dejanfajfar/epoch.net)
+![Nuget](https://img.shields.io/nuget/dt/epoch.net?style=flat-square&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FEpoch.net)
+![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/epoch.net?style=flat-square&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FEpoch.net)
 
 ![](https://raw.githubusercontent.com/dejanfajfar/epoch.net/master/images/logo.png)
 
@@ -194,10 +191,3 @@ var timeSpan = (timestamp1 - timestamp2).ToTimeSpan();
 ### And much more...
 
 More scenarios can be found in the wiki...
-
-## Next steps
-
-Check out the chat 
-[![Gitter](https://img.shields.io/gitter/room/dejanfajfar/epoch.net.svg)](https://gitter.im/dejanfajfar/epoch.net)
-
-Or the wiki (if I have created one yet) :)
