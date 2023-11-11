@@ -2,10 +2,11 @@ Logo colors:
 
 == Background ==
 
-Color1 : 374C5E
-Color2 : 1E264A
+BG color   : 2a282a 
 
 == TEXT ==
 
-Text color : EBA883
-BG color   : 733A5D 
+Color1 : a18cd1
+Color2 : fbc2eb
+
+Font family: Roboto Light
