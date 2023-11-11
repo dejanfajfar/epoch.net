@@ -1,3 +1,4 @@
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/dejanfajfar/epoch.net/dotnet.yml?style=flat-square)
 ![Nuget](https://img.shields.io/nuget/dt/epoch.net?style=flat-square&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FEpoch.net)
 ![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/epoch.net?style=flat-square&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FEpoch.net)
 
