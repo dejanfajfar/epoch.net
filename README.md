@@ -1,8 +1,12 @@
+![](https://raw.githubusercontent.com/dejanfajfar/epoch.net/master/images/logo.png)
+
+---
+
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/dejanfajfar/epoch.net/dotnet.yml?style=flat-square)
 ![Nuget](https://img.shields.io/nuget/dt/epoch.net?style=flat-square&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FEpoch.net)
 ![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/epoch.net?style=flat-square&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FEpoch.net)
 
-![](https://raw.githubusercontent.com/dejanfajfar/epoch.net/master/images/logo.png)
+---
 
 # 👋 Introduction
 
@@ -20,9 +24,9 @@ var timestamp = EpochTime.Now;
 ## 🤔 What is an Epoch
 Epoch is shorthand for _Unix epoch time_ or as it is also known __POSIX time__.
 
-Short version: The number of seconds since __1970-01-01T00:00:00Z__ without leap seconds.
+__Short version:__ The number of seconds since __1970-01-01T00:00:00Z__ without leap seconds.
 
-Long version: [unix time](https://en.wikipedia.org/wiki/Unix_time)
+__Long version:__ [unix time](https://en.wikipedia.org/wiki/Unix_time)
 
 ## Motivation
 With __.net core__ working on all major operating systems and most of them using POSIX to denote time and timestamps.
@@ -37,13 +41,13 @@ For this purpose this library contains extension methods that build upon the exi
 # 📖 Glossary
 
 | Term | Description |
-|:-----|-------------:|
+|:-----|:-------------|
 | EpochTime | Represents a POSIX time instance exact to the _second_ |
 | EpochTimestamp | The number of seconds since 1970-01-01T00:00Z |
 | LongEpochTime | Represents a POSIX time instance exact to the _millisecond_ |
 | LongEpochTimestamp | The number of milliseconds since 1970-01-01T00:00Z |
 
-## Difference between _EpochTime_ and _LongEpochTime_
+## Difference between `EpochTime` and `LongEpochTime`
 
 The initial difference was precision. _EpochTime_ will only be accurate to the nearest second on the other hand _LongEpochTime_ is accurate to the millisecond.
 From this precision difference I decided to differentiate then by their __underlying__ base type.
@@ -61,7 +65,7 @@ From this precision difference I decided to differentiate then by their __underl
 | EpochTimestamp | -2147483648 | 2147483647 |
 | LongEpochTimestamp | -922337203685477 | 922337203685477 |
 
-_📝 Note:_ The range of the `LongEpoch` is theoretically limited only by the range of `int64`.
+📝 _Note:_ The range of the `LongEpoch` is theoretically limited only by the range of `int64`.
 
 # 👨‍🔬 Installation
 
