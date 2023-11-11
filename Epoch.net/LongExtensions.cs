@@ -12,11 +12,11 @@ public static class LongExtensions
     /// </summary>
     /// <param name="epoch">The LongEpochTimestamp</param>
     /// <returns>
-    /// True if the EpochTimestamp is in a valid EpochTime range, False if not 
+    /// True if the EpochTimestamp is in a valid <see cref="EpochTime"/> range, False if not 
     /// </returns>
     public static bool IsValidEpochTimestamp(this long epoch)
     {
-        return epoch >= Constants.MIN_VALUE_INT && epoch <= Constants.MAX_VALUE_INT;
+        return epoch >= EpochTime.MIN_VALUE && epoch <= EpochTime.MAX_VALUE;
     }
 
     /// <summary>
@@ -26,7 +26,7 @@ public static class LongExtensions
     /// <returns>A <see cref="DateTime"/> representation of the given LongEpochTimestamp</returns>
     public static DateTime ToDateTime(this long value)
     {
-        return Constants.UnixEpoch.AddMilliseconds(value);
+        return LongEpochTime.DefaultDateTime.AddMilliseconds(value);
     }
 
     /// <summary>

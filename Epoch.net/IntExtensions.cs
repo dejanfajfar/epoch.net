@@ -14,7 +14,7 @@ public static class IntExtensions
     /// <returns>A <see cref="DateTime"/> initialized to the given offset in seconds from 1970-01-01T00:00Z</returns>
     public static DateTime ToDateTime(this int epoch)
     {
-        return Constants.UnixEpoch.AddSeconds(epoch);
+        return LongEpochTime.DefaultDateTime.AddSeconds(epoch);
     }
 
     /// <summary>

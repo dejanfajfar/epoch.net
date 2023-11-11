@@ -7,8 +7,6 @@ namespace Epoch.net.Test
     public class EpochTime_Operators_Fixture
     {
         private readonly EpochTime Valid_EpochTime = new EpochTime(500);
-        private readonly EpochTime Max_EpochTime = new EpochTime(Constants.MAX_VALUE_INT);
-        private readonly EpochTime Min_EpochTime = new EpochTime(Constants.MIN_VALUE_INT);
         
         [TestMethod]
         public void Addition()
@@ -16,7 +14,7 @@ namespace Epoch.net.Test
             Assert.AreEqual(1000.ToEpochTime(), Valid_EpochTime + Valid_EpochTime);
 
             // Adding over the integer range throws an Exception
-            Assert.ThrowsException<EpochTimeValueException>(() => Max_EpochTime + Valid_EpochTime);
+            Assert.ThrowsException<EpochTimeValueException>(() => EpochTime.MAX + Valid_EpochTime);
         }
 
         [TestMethod]
@@ -25,7 +23,7 @@ namespace Epoch.net.Test
             Assert.AreEqual(Valid_EpochTime, 1000.ToEpochTime() - Valid_EpochTime);
             
             // Subtracting over the integer range throws an Exception
-            Assert.ThrowsException<EpochTimeValueException>(() => Min_EpochTime - Valid_EpochTime);
+            Assert.ThrowsException<EpochTimeValueException>(() => EpochTime.MIN - Valid_EpochTime);
         }
     }
 }

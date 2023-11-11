@@ -78,7 +78,7 @@ public static class TimeSpanExtensions
     {
         var totalSeconds = timeSpan.TotalSeconds;
 
-        return totalSeconds >= Constants.MIN_VALUE_INT && totalSeconds <= Constants.MAX_VALUE_INT;
+        return totalSeconds >= EpochTime.MIN_VALUE && totalSeconds <= EpochTime.MAX_VALUE;
     }
 
     /// <summary>
@@ -92,6 +92,6 @@ public static class TimeSpanExtensions
     {
         var totalMilliseconds = timeSpan.TotalMilliseconds;
 
-        return totalMilliseconds >= Constants.MIN_VALUE_LONG && totalMilliseconds <= Constants.MAX_VALUE_LONG;
+        return totalMilliseconds >= LongEpochTime.MIN_VALUE && totalMilliseconds <= LongEpochTime.MAX_VALUE;
     }
 }

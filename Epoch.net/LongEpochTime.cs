@@ -11,7 +11,21 @@ public sealed class LongEpochTime
 
     static LongEpochTime() => timeProvider = new DefaultTimeProvider();
 
+    /// <summary>
+    /// The default value of <see cref="LongEpochTime"/>
+    /// </summary>
+    /// <remarks>
+    /// Thursday, January 1, 1970 12:00:00 AM GMT
+    /// </remarks>
     public static LongEpochTime Default => new(0);
+
+    public static DateTime DefaultDateTime => new(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+
+    public const long MAX_VALUE = 922337203685477;
+    public const long MIN_VALUE = -922337203685477;
+
+    public static LongEpochTime MIN => new LongEpochTime(MIN_VALUE);
+    public static LongEpochTime MAX => new LongEpochTime(MAX_VALUE);
 
     /// <summary>
     /// Initializes a new instance of <see cref="LongEpochTime"/>

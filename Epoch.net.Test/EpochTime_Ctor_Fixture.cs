@@ -15,26 +15,30 @@ namespace Epoch.net.Test
         {
             Assert.AreEqual(0, new EpochTime(0).Epoch);
             
-            Assert.AreEqual(Constants.MAX_VALUE_INT, new EpochTime(Constants.MAX_VALUE_INT).Epoch);
-            Assert.AreEqual(Constants.MIN_VALUE_INT, new EpochTime(Constants.MIN_VALUE_INT).Epoch);
+            Assert.AreEqual(EpochTime.MAX_VALUE, EpochTime.MAX.Epoch);
+            Assert.AreEqual(EpochTime.MIN_VALUE, EpochTime.MIN.Epoch);
+
+            Assert.AreEqual(EpochTime.MIN, new EpochTime(EpochTime.MIN_VALUE));
+            Assert.AreEqual(EpochTime.MAX, new EpochTime(EpochTime.MAX_VALUE));
         }
 
         [TestMethod]
         public void DateTime()
         {
             Assert.AreEqual(0, new EpochTime(0).Epoch);
+            Assert.AreEqual(0, EpochTime.Default.Epoch);
             Assert.AreEqual(ValidEpochTimestamp, new EpochTime(ValidDateTime).Epoch);
-            Assert.AreEqual(Constants.MIN_VALUE_INT, new EpochTime(Constants.MIN_VALUE_DATETIME).Epoch);
-            Assert.AreEqual(Constants.MAX_VALUE_INT, new EpochTime(Constants.MAX_VALUE_DATETIME).Epoch);
+            Assert.AreEqual(EpochTime.MIN, new EpochTime(EpochTime.MIN_DATETIME));
+            Assert.AreEqual(EpochTime.MAX, new EpochTime(EpochTime.MAX_DATETIME));
 
             Assert.ThrowsException<EpochTimeValueException>(() =>
-                new EpochTime(Constants.MAX_VALUE_DATETIME.AddSeconds(1)));
+                new EpochTime(EpochTime.MAX_DATETIME.AddSeconds(1)));
             Assert.ThrowsException<EpochTimeValueException>(() =>
-                new EpochTime(Constants.MIN_VALUE_DATETIME.AddSeconds(-1)));
+                new EpochTime(EpochTime.MIN_DATETIME.AddSeconds(-1)));
         }
 
         [TestMethod]
-        public void EpochTime()
+        public void EpochTime_Test()
         {
             Assert.AreEqual(ValidEpochTimestamp, new EpochTime(ValidEpochTime).Epoch);
 

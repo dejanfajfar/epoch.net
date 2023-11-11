@@ -15,7 +15,7 @@ public static class DateTimeExtensions
     /// <remarks>The LongEpochTimestamp is the number of milliseconds since 1970-01-01T00:00Z</remarks>
     public static long ToLongEpochTimestamp(this DateTime dateTime)
     {
-        var timeSinceDisco = TimeZoneInfo.ConvertTimeToUtc(dateTime.ToUniversalTime()) - Constants.UnixEpoch;
+        var timeSinceDisco = TimeZoneInfo.ConvertTimeToUtc(dateTime.ToUniversalTime()) - LongEpochTime.DefaultDateTime;
         
         return Convert.ToInt64(timeSinceDisco.TotalMilliseconds);
     }
@@ -36,7 +36,7 @@ public static class DateTimeExtensions
             throw new EpochTimeValueException(dateTime);
         }
         
-        var timeSinceDisco = TimeZoneInfo.ConvertTimeToUtc(dateTime.ToUniversalTime()) - Constants.UnixEpoch;
+        var timeSinceDisco = TimeZoneInfo.ConvertTimeToUtc(dateTime.ToUniversalTime()) - LongEpochTime.DefaultDateTime;
         
         return Convert.ToInt32(timeSinceDisco.TotalSeconds);
     }
@@ -76,6 +76,6 @@ public static class DateTimeExtensions
     /// <returns>True if the <see cref="DateTime"/> is in a valid <see cref="EpochTime"/> range, False if not</returns>
     public static bool IsValidEpochTime(this DateTime dateTime)
     {
-        return dateTime >= Constants.MIN_VALUE_DATETIME && dateTime <= Constants.MAX_VALUE_DATETIME;
+        return dateTime >= EpochTime.MIN_DATETIME && dateTime <= EpochTime.MAX_DATETIME;
     }
 }

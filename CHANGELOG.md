@@ -4,17 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [3.2]
+## [4.0]
 ### Changed
 
 - Updated to .net version 7
 - Moved build to github actions
-- 
+- Updated code formatting to new standard
 
 ### Added
 
 - DateOnly extensions
 - TimeOnly extensions
+
+### Removed
+
+- The Constants static class
 
 ## [3.1]
 ### Added

@@ -12,6 +12,39 @@ public sealed class EpochTime
         TimeProvider = new DefaultTimeProvider();
     }
 
+    /// <summary>
+    /// Provides a new instance of a <see cref="EpochTime"/> with the maximal possible value
+    /// </summary>
+    public static EpochTime MAX => new EpochTime(MAX_VALUE);
+    /// <summary>
+    /// Provides a new instance of a <see cref="EpochTime"/> with the minimal possible value
+    /// </summary>
+    public static EpochTime MIN => new EpochTime(MIN_VALUE);
+    /// <summary>
+    /// The minimal raw epoch value
+    /// </summary>
+    public const int MIN_VALUE = -2147483648;
+    /// <summary>
+    /// The maximal raw epoch value
+    /// </summary>
+    public const int MAX_VALUE = 2147483647;
+    /// <summary>
+    /// The maximal <see cref="DateTime"/> value that a <see cref="EpochTime"/> can take
+    /// </summary>
+    public static readonly DateTime MAX_DATETIME = new(2038, 1, 19,3,14,07, DateTimeKind.Utc); // 3:14:07 Tuesday, 19 January 2038 UTC
+    /// <summary>
+    /// The minimal <see cref="DateTime"/> value that a <see cref="EpochTime"/> can take
+    /// </summary>
+    public static readonly DateTime MIN_DATETIME = new(1901, 12, 13, 20, 45, 52, DateTimeKind.Utc); // 20:45:52 Friday, 13 December 1901 UTC
+
+    /// <summary>
+    /// The default value of <see cref="LongEpochTime"/>
+    /// </summary>
+    /// <remarks>
+    /// Thursday, January 1, 1970 12:00:00 AM GMT
+    /// </remarks>
+    public static EpochTime Default => new(0);
+
     private static IDateTimeProvider TimeProvider { get; set; }
 
     #region Constructors
@@ -164,11 +197,20 @@ public sealed class EpochTime
 
     #region Operators
 
+    /// <summary>
+    /// Implements the + operator between two <see cref="EpochTime"/> instances
+    /// </summary>
+    /// <param name="operand1">The augend</param>
+    /// <param name="operand2">The addend</param>
+    /// <returns>The sum of the two <see cref="EpochTime"/></returns>
+    /// <exception cref="EpochTimeValueException">
+    /// If the result is not a valid <see cref="EpochTime"/>
+    /// </exception>
     public static EpochTime operator +(EpochTime operand1, EpochTime operand2)
     {
         var epochSum = operand1.Epoch + (long)operand2.Epoch;
 
-        if (!epochSum.IsValidEpochTimestamp())
+        if (epochSum.IsValidEpochTimestamp() is false)
         {
             throw new EpochTimeValueException(epochSum);
         }
@@ -176,11 +218,19 @@ public sealed class EpochTime
         return new EpochTime(Convert.ToInt32(epochSum));
     }
 
+    /// <summary>
+    /// Implements the - operator between two <see cref="EpochTime"/> instances
+    /// </summary>
+    /// <param name="operand1">The minuend</param>
+    /// <param name="operand2">The subtrahend</param>
+    /// <returns>The Difference between the two <see cref="EpochTime"/> instances</returns>
+    /// <exception cref="EpochTimeValueException">
+    /// If the result is not a valid <see cref="EpochTime"/></exception>
     public static EpochTime operator -(EpochTime operand1, EpochTime operand2)
     {
         var epochSub = operand1.Epoch - (long)operand2.Epoch;
 
-        if (!epochSub.IsValidEpochTimestamp())
+        if (epochSub.IsValidEpochTimestamp() is false)
         {
             throw new EpochTimeValueException(epochSub);
         }
