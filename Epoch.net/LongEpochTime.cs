@@ -9,31 +9,21 @@ public sealed class LongEpochTime
 {
     private static IDateTimeProvider timeProvider;
 
-    static LongEpochTime()
-    {
-        timeProvider = new DefaultTimeProvider();
-    }
+    static LongEpochTime() => timeProvider = new DefaultTimeProvider();
 
     public static LongEpochTime Default => new(0);
-
 
     /// <summary>
     /// Initializes a new instance of <see cref="LongEpochTime"/>
     /// </summary>
     /// <param name="dateTime">The <see cref="DateTime"/> from which to initialize the instance</param>
-    public LongEpochTime(DateTime dateTime)
-    {
-        rawEpoch = dateTime.ToLongEpochTimestamp();
-    }
+    public LongEpochTime(DateTime dateTime) => rawEpoch = dateTime.ToLongEpochTimestamp();
 
     /// <summary>
     /// Initializes a new instance of <see cref="LongEpochTime"/>
     /// </summary>
     /// <param name="longEpochTimestamp">The number of milliseconds since 1970-01-01T00:00Z</param>
-    public LongEpochTime(long longEpochTimestamp)
-    {
-        rawEpoch = longEpochTimestamp;
-    }
+    public LongEpochTime(long longEpochTimestamp) => rawEpoch = longEpochTimestamp;
 
     /// <summary>
     /// Initializes a new instance of <see cref="LongEpochTime"/>
@@ -103,16 +93,12 @@ public sealed class LongEpochTime
     /// <summary>
     /// Resets the global time provider to the default system time provider 
     /// </summary>
-    public static void ResetTimeProvider()
-    {
-        timeProvider = new DefaultTimeProvider();
-    }
+    public static void ResetTimeProvider() => timeProvider = new DefaultTimeProvider();
 
     /// <summary>
     /// Gets the current UTC date and time as an <see cref="LongEpochTime"/>
     /// </summary>
     public static LongEpochTime Now => timeProvider.UtcNow.ToLongEpochTime();
-
 
     /// <summary>
     /// Gets a millisecond unix epoch representation of the <see cref="LongEpochTime"/> instance
@@ -139,20 +125,19 @@ public sealed class LongEpochTime
     /// </remarks>
     public LongEpochTime Add(TimeSpan timeSpan)
     {
-        TimeSpan newSpan = TimeSpan + timeSpan;
+        var newSpan = TimeSpan + timeSpan;
         rawEpoch = newSpan.ToLongEpochTimestamp();
         return this;
     }
 
+#if NET6_0_OR_GREATER
     /// <summary>
     /// Applies the given <see cref="TimeOnly"/> offset to the <see cref="LongEpochTime"/> instance
     /// </summary>
     /// <param name="time"></param>
     /// <returns></returns>
-    public LongEpochTime Add(TimeOnly time)
-    {
-        return this;
-    }
+    public LongEpochTime Add(TimeOnly time) => this;
+#endif
 
     public static LongEpochTime operator +(LongEpochTime operator1, LongEpochTime operator2)
     {
@@ -161,7 +146,7 @@ public sealed class LongEpochTime
         return new LongEpochTime(operator1.Epoch + operator2.Epoch);
     }
 
-    
+
     public static LongEpochTime operator -(LongEpochTime operator1, LongEpochTime operator2)
     {
         //todo: There is a open issue with long number underflow
@@ -170,20 +155,11 @@ public sealed class LongEpochTime
     }
 
     /// <inheritdoc/>
-    public override int GetHashCode()
-    {
-        return rawEpoch.GetHashCode();
-    }
+    public override int GetHashCode() => rawEpoch.GetHashCode();
 
     /// <inheritdoc/>
-    public override bool Equals(object obj)
-    {
-        return obj is LongEpochTime comparedEpoch && comparedEpoch.Epoch == Epoch;
-    }
+    public override bool Equals(object obj) => obj is LongEpochTime comparedEpoch && comparedEpoch.Epoch == Epoch;
 
     /// <inheritdoc/>
-    public override string ToString()
-    {
-        return Epoch.ToString();
-    }
+    public override string ToString() => Epoch.ToString();
 }

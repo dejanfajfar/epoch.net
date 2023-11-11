@@ -130,6 +130,7 @@ public sealed class EpochTime
     /// </summary>
     public TimeSpan TimeSpan => rawEpoch.ToTimeSpan();
 
+#if NET6_0_OR_GREATER
     /// <summary>
     /// Returns a <see cref="DateOnly"/> representation of the <see cref="EpochTime"/> instance
     /// </summary>
@@ -139,6 +140,8 @@ public sealed class EpochTime
     /// Returns a <see cref="TimeOnly"/> representation of the <see cref="EpochTime"/> instance
     /// </summary>
     public TimeOnly TimeOnly => TimeOnly.FromDateTime(rawEpoch.ToDateTime());
+
+#endif
 
     #region Epoch manipulation
 
