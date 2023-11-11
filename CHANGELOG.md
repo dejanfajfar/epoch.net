@@ -4,30 +4,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [4.0]
-### Changed
+## 🏷️ 4.0
+
+### ♻️ Changed
 
 - Updated to .net version 7
 - Moved build to github actions
 - Updated code formatting to new standard
 
-### Added
+### ✨ Added
 
 - DateOnly extensions
 - TimeOnly extensions
 
-### Removed
+### 🔥 Removed
 
 - The Constants static class
 
-## [3.1]
-### Added
+## 🏷️ 3.1
+
+### ✨ Added
 
 - LongEpochTime ToString method
 - EpochTime ToString method
 
-## [3.0]
-### Added
+## 🏷️ 3.0
+
+### ✨ Added
 
 - LongEpochTime
 - EpochTime.ShortEpoch
@@ -41,7 +44,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - DefaultTimeProvider
 - Long extensions methods
 
-### Removed
+### 🔥 Removed
 
 - EpochOverflowException
 - EpochTime.AddSeconds
@@ -49,17 +52,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - EpochTime.ToDateTime
 - EpochTime.ToTimeSpan
 
-## [2.0]
-### Changed
+## 🏷️ 2.0
+
+### ♻️ Changed
 
 - Renamed the ```Epoch``` class to ```EpochTime``` to fix the name collision with the namespace.
 - Updated the README.md to reflect the new naming
 
-### Fixed
+### 🐛 Fixed
 
 - The name collision bug
 
-## [1.1]
-### Fixed
+## 🏷️ 1.1
+
+### 🐛 Fixed
 
 * DateTime.ToRawEpoch now thrown an EpochOverflow exception if the resulting epoch is not storable in an integer
