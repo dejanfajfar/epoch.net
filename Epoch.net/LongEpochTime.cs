@@ -19,12 +19,30 @@ public sealed class LongEpochTime
     /// </remarks>
     public static LongEpochTime Default => new(0);
 
+    /// <summary>
+    /// The default date time value of an <see cref="LongEpochTime"/> 
+    /// </summary>
+    /// /// <remarks>
+    /// Thursday, January 1, 1970 12:00:00 AM GMT
+    /// </remarks>
     public static DateTime DefaultDateTime => new(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 
+    /// <summary>
+    /// The minimal possible <see cref="long"/> value of a <see cref="LongEpochTime"/>
+    /// </summary>
     public const long MAX_VALUE = 922337203685477;
+    /// <summary>
+    /// The maximal possible <see cref="long"/> value of a <see cref="LongEpochTime"/>
+    /// </summary>
     public const long MIN_VALUE = -922337203685477;
 
+    /// <summary>
+    /// The minimal value of a <see cref="LongEpochTime"/>
+    /// </summary>
     public static LongEpochTime MIN => new(MIN_VALUE);
+    /// <summary>
+    /// The maximal value of a <see cref="LongEpochTime"/>
+    /// </summary>
     public static LongEpochTime MAX => new(MAX_VALUE);
 
     /// <summary>
@@ -93,7 +111,7 @@ public sealed class LongEpochTime
     private long rawEpoch { get; set; }
 
     /// <summary>
-    /// Injects a new global thread safe <see cref="TimeProvider"/> instance to be used globally
+    /// Injects a new global thread safe <see cref="IDateTimeProvider"/> instance to be used globally
     /// </summary>
     /// <param name="timeProvider">The new time provider instance</param>
     public static void SetTimeProvider(IDateTimeProvider timeProvider)
@@ -153,6 +171,12 @@ public sealed class LongEpochTime
     public LongEpochTime Add(TimeOnly time) => this;
 #endif
 
+    /// <summary>
+    /// Implements the + operator between two <see cref="LongEpochTime"/> instances
+    /// </summary>
+    /// <param name="operator1">The augend</param>
+    /// <param name="operator2">The addend</param>
+    /// <returns>The sum of the two <see cref="LongEpochTime"/></returns>
     public static LongEpochTime operator +(LongEpochTime operator1, LongEpochTime operator2)
     {
         // todo: There is a open issue with long number overflow
@@ -160,6 +184,12 @@ public sealed class LongEpochTime
         return new LongEpochTime(operator1.Epoch + operator2.Epoch);
     }
 
+    /// <summary>
+    /// Implements the - operator between two <see cref="LongEpochTime"/> instances
+    /// </summary>
+    /// <param name="operator1">The minuend</param>
+    /// <param name="operator2">The subtrahend</param>
+    /// <returns>The Difference between the two <see cref="LongEpochTime"/> instances</returns>
     public static LongEpochTime operator -(LongEpochTime operator1, LongEpochTime operator2)
     {
         //todo: There is a open issue with long number underflow

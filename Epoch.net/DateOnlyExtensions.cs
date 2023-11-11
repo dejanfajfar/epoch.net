@@ -2,6 +2,9 @@
 
 namespace Epoch.net;
 #if NET6_0_OR_GREATER
+/// <summary>
+/// Implements Epoch extentions on the <see cref="DateOnly"/> type
+/// </summary>
 public static class DateOnlyExtensions
 {
     /// <summary>

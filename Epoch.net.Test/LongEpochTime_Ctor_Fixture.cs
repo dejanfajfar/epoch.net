@@ -15,6 +15,8 @@ namespace Epoch.net.Test
         public void Long()
         {
             Assert.AreEqual(0L, new LongEpochTime(0L).Epoch);
+
+            Assert.AreEqual(LongEpochTime.Default, new LongEpochTime(LongEpochTime.DefaultDateTime));
             
             Assert.AreEqual(ValidLongEpochTimestamp, new LongEpochTime(ValidLongEpochTimestamp).Epoch);
         }
