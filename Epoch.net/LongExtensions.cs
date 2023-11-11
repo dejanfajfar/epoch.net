@@ -14,30 +14,21 @@ public static class LongExtensions
     /// <returns>
     /// True if the EpochTimestamp is in a valid <see cref="EpochTime"/> range, False if not 
     /// </returns>
-    public static bool IsValidEpochTimestamp(this long epoch)
-    {
-        return epoch >= EpochTime.MIN_VALUE && epoch <= EpochTime.MAX_VALUE;
-    }
+    public static bool IsValidEpochTimestamp(this long epoch) => epoch is >= EpochTime.MIN_VALUE and <= EpochTime.MAX_VALUE;
 
     /// <summary>
     /// Transforms the LongEpochTimestamp into a <see cref="DateTime"/>
     /// </summary>
     /// <param name="value">The LongEpochTimestamp</param>
     /// <returns>A <see cref="DateTime"/> representation of the given LongEpochTimestamp</returns>
-    public static DateTime ToDateTime(this long value)
-    {
-        return LongEpochTime.DefaultDateTime.AddMilliseconds(value);
-    }
+    public static DateTime ToDateTime(this long value) => LongEpochTime.DefaultDateTime.AddMilliseconds(value);
 
     /// <summary>
     /// Transforms the LongEpochTimestamp into a <see cref="TimeSpan"/>
     /// </summary>
     /// <param name="value">The LongEpochTimestamp</param>
     /// <returns>The <see cref="TimeSpan"/> representation of the LongEpochTimestamp</returns>
-    public static TimeSpan ToTimeSpan(this long value)
-    {
-        return TimeSpan.FromMilliseconds(value);
-    }
+    public static TimeSpan ToTimeSpan(this long value) => TimeSpan.FromMilliseconds(value);
 
     /// <summary>
     /// Transforms the LongEpochTimestamp into a EpochTimestamp
@@ -51,14 +42,9 @@ public static class LongExtensions
     /// </exception>
     public static int ToEpochTimestamp(this long value)
     {
-        var seconds = value / 1000;
+        long seconds = value / 1000;
 
-        if (seconds.IsValidEpochTimestamp())
-        {
-            return Convert.ToInt32(seconds);
-        }
-        
-        throw new EpochTimeValueException(value);
+        return seconds.IsValidEpochTimestamp() ? Convert.ToInt32(seconds) : throw new EpochTimeValueException(value);
     }
 
     /// <summary>
@@ -66,8 +52,5 @@ public static class LongExtensions
     /// </summary>
     /// <param name="value">The LongEpochTimestamp</param>
     /// <returns>A <see cref="LongEpochTime"/> initialized with the LongEpochTimestamp</returns>
-    public static LongEpochTime ToLongEpochTime(this long value)
-    {
-        return new LongEpochTime(value);
-    }
+    public static LongEpochTime ToLongEpochTime(this long value) => new(value);
 }

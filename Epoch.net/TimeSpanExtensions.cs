@@ -12,10 +12,7 @@ public static class TimeSpanExtensions
     /// </summary>
     /// <param name="timeSpan">The given <see cref="TimeSpan"/></param>
     /// <returns>A new <see cref="EpochTime"/> instance initialized with the given <see cref="TimeSpan"/></returns>
-    public static EpochTime ToEpochTime(this TimeSpan timeSpan)
-    {
-        return new EpochTime(timeSpan);
-    }
+    public static EpochTime ToEpochTime(this TimeSpan timeSpan) => new(timeSpan);
 
     /// <summary>
     /// Transforms the given <see cref="TimeSpan"/> into a EpochTimestamp
@@ -27,14 +24,9 @@ public static class TimeSpanExtensions
     /// </exception>
     public static int ToEpochTimestamp(this TimeSpan timeSpan)
     {
-        var totalSeconds = timeSpan.TotalSeconds;
+        double totalSeconds = timeSpan.TotalSeconds;
 
-        if (!timeSpan.IsValidEpochTime())
-        {
-            throw new EpochTimeValueException(timeSpan);
-        }
-
-        return Convert.ToInt32(totalSeconds);
+        return !timeSpan.IsValidEpochTime() ? throw new EpochTimeValueException(timeSpan) : Convert.ToInt32(totalSeconds);
     }
 
     /// <summary>
@@ -42,10 +34,7 @@ public static class TimeSpanExtensions
     /// </summary>
     /// <param name="timeSpan">The given <see cref="TimeSpan"/></param>
     /// <returns>A <see cref="LongEpochTime"/> representation of the given <see cref="TimeSpan"/></returns>
-    public static LongEpochTime ToLongEpochTime(this TimeSpan timeSpan)
-    {
-        return new LongEpochTime(timeSpan);
-    }
+    public static LongEpochTime ToLongEpochTime(this TimeSpan timeSpan) => new(timeSpan);
 
     /// <summary>
     /// Transforms the given <see cref="TimeSpan"/> into a LongEpochTimestamp
@@ -57,14 +46,9 @@ public static class TimeSpanExtensions
     /// </exception>
     public static long ToLongEpochTimestamp(this TimeSpan timeSpan)
     {
-        var totalMilliseconds = timeSpan.TotalMilliseconds;
+        double totalMilliseconds = timeSpan.TotalMilliseconds;
 
-        if (!timeSpan.IsValidLongEpochTime())
-        {
-            throw new LongEpochTimeValueException(timeSpan);
-        }
-
-        return Convert.ToInt64(totalMilliseconds);
+        return !timeSpan.IsValidLongEpochTime() ? throw new LongEpochTimeValueException(timeSpan) : Convert.ToInt64(totalMilliseconds);
     }
 
     /// <summary>
@@ -76,9 +60,9 @@ public static class TimeSpanExtensions
     /// </returns>
     public static bool IsValidEpochTime(this TimeSpan timeSpan)
     {
-        var totalSeconds = timeSpan.TotalSeconds;
+        double totalSeconds = timeSpan.TotalSeconds;
 
-        return totalSeconds >= EpochTime.MIN_VALUE && totalSeconds <= EpochTime.MAX_VALUE;
+        return totalSeconds is >= EpochTime.MIN_VALUE and <= EpochTime.MAX_VALUE;
     }
 
     /// <summary>
@@ -90,8 +74,8 @@ public static class TimeSpanExtensions
     /// </returns>
     public static bool IsValidLongEpochTime(this TimeSpan timeSpan)
     {
-        var totalMilliseconds = timeSpan.TotalMilliseconds;
+        double totalMilliseconds = timeSpan.TotalMilliseconds;
 
-        return totalMilliseconds >= LongEpochTime.MIN_VALUE && totalMilliseconds <= LongEpochTime.MAX_VALUE;
+        return totalMilliseconds is >= LongEpochTime.MIN_VALUE and <= LongEpochTime.MAX_VALUE;
     }
 }

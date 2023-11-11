@@ -24,8 +24,8 @@ public sealed class LongEpochTime
     public const long MAX_VALUE = 922337203685477;
     public const long MIN_VALUE = -922337203685477;
 
-    public static LongEpochTime MIN => new LongEpochTime(MIN_VALUE);
-    public static LongEpochTime MAX => new LongEpochTime(MAX_VALUE);
+    public static LongEpochTime MIN => new(MIN_VALUE);
+    public static LongEpochTime MAX => new(MAX_VALUE);
 
     /// <summary>
     /// Initializes a new instance of <see cref="LongEpochTime"/>
@@ -159,7 +159,6 @@ public sealed class LongEpochTime
 
         return new LongEpochTime(operator1.Epoch + operator2.Epoch);
     }
-
 
     public static LongEpochTime operator -(LongEpochTime operator1, LongEpochTime operator2)
     {

@@ -7,5 +7,6 @@ namespace Epoch.net;
 /// </summary>
 public class DefaultTimeProvider : IDateTimeProvider
 {
+    /// <inheritdoc/>
     public DateTime UtcNow => DateTime.UtcNow;
 }

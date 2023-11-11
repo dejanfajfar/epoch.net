@@ -7,19 +7,16 @@ namespace Epoch.net;
 /// </summary>
 public sealed class EpochTime
 {
-    static EpochTime()
-    {
-        TimeProvider = new DefaultTimeProvider();
-    }
+    static EpochTime() => TimeProvider = new DefaultTimeProvider();
 
     /// <summary>
     /// Provides a new instance of a <see cref="EpochTime"/> with the maximal possible value
     /// </summary>
-    public static EpochTime MAX => new EpochTime(MAX_VALUE);
+    public static EpochTime MAX => new(MAX_VALUE);
     /// <summary>
     /// Provides a new instance of a <see cref="EpochTime"/> with the minimal possible value
     /// </summary>
-    public static EpochTime MIN => new EpochTime(MIN_VALUE);
+    public static EpochTime MIN => new(MIN_VALUE);
     /// <summary>
     /// The minimal raw epoch value
     /// </summary>
@@ -53,10 +50,7 @@ public sealed class EpochTime
     /// Creates a new instance of <see cref="EpochTime"/> with a given rawEpoch
     /// </summary>
     /// <param name="rawEpoch">The number of seconds from 1970-01-01T00:00:00</param>
-    public EpochTime(int rawEpoch)
-    {
-        this.rawEpoch = rawEpoch;
-    }
+    public EpochTime(int rawEpoch) => this.Epoch = rawEpoch;
 
     /// <summary>
     /// Creates a new instance of <see cref="EpochTime"/> with the given <see cref="DateTime"/>
@@ -75,7 +69,7 @@ public sealed class EpochTime
             throw new EpochTimeValueException(dateTime);
         }
 
-        rawEpoch = dateTime.ToEpochTimestamp();
+        Epoch = dateTime.ToEpochTimestamp();
     }
 
     /// <summary>
@@ -93,7 +87,7 @@ public sealed class EpochTime
             throw new ArgumentNullException(nameof(epoch), "The provided epoch can not be null");
         }
 
-        rawEpoch = epoch.Epoch;
+        Epoch = epoch.Epoch;
     }
 
     /// <summary>
@@ -110,11 +104,9 @@ public sealed class EpochTime
             throw new EpochTimeValueException(timeSpan);
         }
 
-        rawEpoch = timeSpan.ToEpochTimestamp();
+        Epoch = timeSpan.ToEpochTimestamp();
     }
     #endregion
-
-    private int rawEpoch;
 
     #region Static methods
 
@@ -133,46 +125,40 @@ public sealed class EpochTime
     /// <summary>
     /// Resets the global time provider to the default system time provider 
     /// </summary>
-    public static void ResetTimeProvider()
-    {
-        TimeProvider = new DefaultTimeProvider();
-    }
+    public static void ResetTimeProvider() => TimeProvider = new DefaultTimeProvider();
 
     /// <summary>
     /// Gets the current UTC date and time as an <see cref="EpochTime"/>
     /// </summary>
     public static EpochTime Now => TimeProvider.UtcNow.ToEpochTime();
 
-
     #endregion
-
 
     /// <summary>
     /// Gets a <see cref="int"/> representation of the <see cref="EpochTime"/> instance
     /// </summary>
-    public int Epoch => rawEpoch;
+    public int Epoch { get; private set; }
 
     /// <summary>
     /// Returns a <see cref="DateTime"/> representation of the <see cref="EpochTime"/> instance
     /// </summary>
-    public DateTime DateTime => rawEpoch.ToDateTime();
-
+    public DateTime DateTime => Epoch.ToDateTime();
 
     /// <summary>
     /// Returns a <see cref="TimeSpan"/> representation of the <see cref="EpochTime"/> instance
     /// </summary>
-    public TimeSpan TimeSpan => rawEpoch.ToTimeSpan();
+    public TimeSpan TimeSpan => Epoch.ToTimeSpan();
 
 #if NET6_0_OR_GREATER
     /// <summary>
     /// Returns a <see cref="DateOnly"/> representation of the <see cref="EpochTime"/> instance
     /// </summary>
-    public DateOnly DateOnly => DateOnly.FromDateTime(rawEpoch.ToDateTime());
+    public DateOnly DateOnly => DateOnly.FromDateTime(Epoch.ToDateTime());
 
     /// <summary>
     /// Returns a <see cref="TimeOnly"/> representation of the <see cref="EpochTime"/> instance
     /// </summary>
-    public TimeOnly TimeOnly => TimeOnly.FromDateTime(rawEpoch.ToDateTime());
+    public TimeOnly TimeOnly => TimeOnly.FromDateTime(Epoch.ToDateTime());
 
 #endif
 
@@ -188,8 +174,8 @@ public sealed class EpochTime
     /// </remarks>
     public EpochTime Add(TimeSpan span)
     {
-        var newSpan = this.TimeSpan + span;
-        rawEpoch = newSpan.ToEpochTimestamp();
+        var newSpan = TimeSpan + span;
+        Epoch = newSpan.ToEpochTimestamp();
         return this;
     }
 
@@ -208,14 +194,11 @@ public sealed class EpochTime
     /// </exception>
     public static EpochTime operator +(EpochTime operand1, EpochTime operand2)
     {
-        var epochSum = operand1.Epoch + (long)operand2.Epoch;
+        long epochSum = operand1.Epoch + (long)operand2.Epoch;
 
-        if (epochSum.IsValidEpochTimestamp() is false)
-        {
-            throw new EpochTimeValueException(epochSum);
-        }
-
-        return new EpochTime(Convert.ToInt32(epochSum));
+        return epochSum.IsValidEpochTimestamp() is false
+            ? throw new EpochTimeValueException(epochSum)
+            : new EpochTime(Convert.ToInt32(epochSum));
     }
 
     /// <summary>
@@ -228,41 +211,24 @@ public sealed class EpochTime
     /// If the result is not a valid <see cref="EpochTime"/></exception>
     public static EpochTime operator -(EpochTime operand1, EpochTime operand2)
     {
-        var epochSub = operand1.Epoch - (long)operand2.Epoch;
+        long epochSub = operand1.Epoch - (long)operand2.Epoch;
 
-        if (epochSub.IsValidEpochTimestamp() is false)
-        {
-            throw new EpochTimeValueException(epochSub);
-        }
-
-        return new EpochTime(operand1.Epoch - operand2.Epoch);
+        return epochSub.IsValidEpochTimestamp() is false
+            ? throw new EpochTimeValueException(epochSub)
+            : new EpochTime(operand1.Epoch - operand2.Epoch);
     }
     #endregion
 
     #region Equals
 
     /// <inheritdoc/>
-    public override bool Equals(object obj)
-    {
-        if (obj is EpochTime comparedEpoch)
-        {
-            return comparedEpoch.Epoch == Epoch;
-        }
-
-        return false;
-    }
+    public override bool Equals(object obj) => obj is EpochTime comparedEpoch && comparedEpoch.Epoch == Epoch;
 
     /// <inheritdoc/>
-    public override int GetHashCode()
-    {
-        return Epoch;
-    }
+    public override int GetHashCode() => Epoch;
 
     /// <inheritdoc/>
-    public override string ToString()
-    {
-        return Epoch.ToString();
-    }
+    public override string ToString() => Epoch.ToString();
 
     #endregion
 }
