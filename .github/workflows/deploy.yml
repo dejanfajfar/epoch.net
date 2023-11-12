@@ -6,7 +6,7 @@ name: Deploy
 on:
   push:
     tags:
-      - "*" # Only run if a tag is pressent
+      - "v*" # Only run if a tag is pressent
   workflow_dispatch:
 
 jobs:
@@ -33,6 +33,12 @@ jobs:
       - name: Get Tag
         id: tag
         run: echo "::set-output name=tag::${{ github.ref }}"
+      - name: Extract Version
+        id: version
+        run: |
+          tag_ref="${{ steps.tag.outputs.tag }}"
+          version=$(echo "$tag_ref" | sed -n 's|^refs/tags/v\(.*\)$|\1|p')
+          echo "::set-output name=version::$version"
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
@@ -42,7 +48,7 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
       - name: Pack
-        run: doitnet pack --output nupkgs -p:PackageVersion=${{ steps.tag.outputs.tag }} -p Configuration="Release"
+        run: dotnet pack --output nupkgs -p:PackageVersion=${{ steps.version.outputs.version }} -p Configuration="Release"
       - name: Publish Artifact
         uses: actions/upload-artifact@v2
         with:
