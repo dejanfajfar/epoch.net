@@ -15,10 +15,20 @@
     </PropertyGroup>
     
     <PropertyGroup>
-        <PackageIconUrl>https://raw.githubusercontent.com/dejanfajfar/epoch.net/master/images/logo_square_64.png</PackageIconUrl>
+        <PackageIcon>icon.png</PackageIcon>
         <PackageTags>posix unix timestamp epoch datetime timespan library core standard</PackageTags>
         <PackageProjectUrl>https://github.com/dejanfajfar/epoch.net</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageReleaseNotes>CHANGELOG.md</PackageReleaseNotes>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
     </PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md" Pack="true" PackagePath="\"/>
+		<None Include="..\CHANGELOG.md" Pack="true" PackagePath="\"/>
+		<None Include="..\LICENSE" Pack="true" PackagePath="\"/>
+		<None Include="..\images\icon.png" Pack="true" PackagePath="\"/>
+	</ItemGroup>
 
 </Project>
