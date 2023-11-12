@@ -22,6 +22,7 @@ var timestamp = EpochTime.Now;
 ```
 
 ## 🤔 What is an Epoch
+
 Epoch is shorthand for _Unix epoch time_ or as it is also known __POSIX time__.
 
 __Short version:__ The number of seconds since __1970-01-01T00:00:00Z__ without leap seconds.
@@ -29,6 +30,7 @@ __Short version:__ The number of seconds since __1970-01-01T00:00:00Z__ without 
 __Long version:__ [unix time](https://en.wikipedia.org/wiki/Unix_time)
 
 ## Motivation
+
 With __.net core__ working on all major operating systems and most of them using POSIX to denote time and timestamps.
 Not to mention the myriad of 3rd party tools, using POSIX time internally. The need for a working and tested implementation became clearer and clearer.
 Additionally I did not want to write this logic in an inferior form in many of my applications.
@@ -112,14 +114,20 @@ Everyone can help in their own way.
 
 Here are just some ideas:
 
-- Create a (ticket)[https://github.com/dejanfajfar/epoch.net/issues] with a improvement suggestion
-- Create a (ticket)[https://github.com/dejanfajfar/epoch.net/issues] with a bug or issue you may be having
-- Create a (ticket)[https://github.com/dejanfajfar/epoch.net/issues] with a question that you may be having
+- Create a [ticket](https://github.com/dejanfajfar/epoch.net/issues) with a improvement suggestion
+- Create a [ticket](https://github.com/dejanfajfar/epoch.net/issues) with a bug or issue you may be having
+- Create a [ticket](https://github.com/dejanfajfar/epoch.net/issues) with a question that you may be having
 - Have a look at the code and suggest improvements
 - Spread the word of its existence
 - And for the hardcore among you you can help me with the documentation 😈
 
+# 🔗 Links
+
+- [Changelog](https://github.com/dejanfajfar/epoch.net/blob/master/CHANGELOG.md)
+- [Wiki](https://github.com/dejanfajfar/epoch.net/wiki)
+- [Nuge](https://www.nuget.org/packages/Epoch.net)
+
 # ⏭️ Next steps
 
 - Consult the [Wiki](https://github.com/dejanfajfar/epoch.net/wiki)
-- Create a (ticket)[https://github.com/dejanfajfar/epoch.net/issues] to help the project improve
+- Create a [ticket](https://github.com/dejanfajfar/epoch.net/issues) to help the project improve
