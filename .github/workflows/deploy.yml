@@ -58,5 +58,5 @@ jobs:
       - uses: ncipollo/release-action@v1
         with:
           name: "Release ${{ steps.version.outputs.version }}"
-          artifacts: "*"
+          artifacts: "*.nupkg;CHANGELOG.md;LICENSE"
           generateReleaseNotes: true
