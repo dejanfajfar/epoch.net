@@ -67,7 +67,20 @@ From this precision difference I decided to differentiate then by their __underl
 
 📝 _Note:_ The range of the `LongEpoch` is theoretically limited only by the range of `int64`.
 
-# 👨‍🔬 Installation
+# ✅ Features
+
+- EpochTime a second precise POSIX time wrapper
+- LongEpochTime a millisecond precise POSIX time wrapper
+- Extension methods for build in time handling classes:
+  - DateTime
+  - TimeSpan
+  - DateOnly
+  - TimeOnly
+- Fully tested ;)
+
+# 🏃‍♂️ Quick start
+
+## Add the package to yor project
 
 The preferred way of integrating the library is to use the [nuget package](https://www.nuget.org/packages/Epoch.net). This is easily done be either: 
 
@@ -81,109 +94,32 @@ or
 Install-Package Epoch.net
 ```
 
-## Quick How-Tos
+## Reference
 
-Before you go and start looking for answers in the wiki here a few common scenarios and their suggested solutions.
-
-### Current time to EpochTime
+After the package is added to the project add the using directive:
 
 ```csharp
+...
 using Epoch.net;
-
-var timestamp = EpochTime.Now;
+...
 ```
 
-or use the provided extension method on the DateTime structure
+Done 🎉
 
-```csharp
-using Epoch.net;
+# 🦮 Helping out
 
-var timestamp = DateTime.Now.ToEpochTime();
-```
+Everyone can help in their own way. 
 
-#### The same is true for a LongEpochTime
+Here are just some ideas:
 
-```csharp
-using Epoch.net;
+- Create a (ticket)[https://github.com/dejanfajfar/epoch.net/issues] with a improvement suggestion
+- Create a (ticket)[https://github.com/dejanfajfar/epoch.net/issues] with a bug or issue you may be having
+- Create a (ticket)[https://github.com/dejanfajfar/epoch.net/issues] with a question that you may be having
+- Have a look at the code and suggest improvements
+- Spread the word of its existence
+- And for the hardcore among you you can help me with the documentation 😈
 
-var timestamp = LongEpochTime.Now;
-```
+# ⏭️ Next steps
 
-or
-
-```csharp
-using Epoch.net;
-
-var timestamp = DateTime.Now.ToLongEpochTime();
-```
-
-### Get a DateTime from a epoch timestamp
-
-```csharp
-using Epoch.net;
-
-int timestamp = 1547931356;
-
-var date = new EpochTime(timestamp).DateTime;
-```
-
-or use the extension method on the integer
-
-```csharp
-using Epoch.net
-
-int timestamp = 1547931356;
-
-var date = timestamp.ToDateTime();
-```
-
-#### The same can be done with a LongEpochTimestamp
-
-```csharp
-using Epoch.net;
-
-long timestamp = 1547931356567;
-
-var date = new LongEpochTime(timestamp).DateTime;
-```
-
-or
-
-```csharp
-using Epoch.net
-
-long timestamp = 1547931356;
-
-var date = timestamp.ToDateTime();
-```
-
-### Determine the time span between two epoch timestamps
-
-```csharp
-using Epoch.net;
-
-int timestamp1 = 1540425600;
-int timestamp2 = 1547931356;
-
-var epoch1 = new EpochTime(timestamp1);
-var epoch2 = new EpochTime(timestamp2);
-
-var epochDif = epoch2 - epoch1;
-
-var timeSpan = epochDif.ToTimeSpan();
-```
-
-or we again use some provided extension methods
-
-```csharp
-using Epoch.net
-
-int timestamp1 = 1540425600;
-int timestamp2 = 1547931356;
-
-var timeSpan = (timestamp1 - timestamp2).ToTimeSpan();
-```
-
-### And much more...
-
-More scenarios can be found in the wiki...
+- Consult the [Wiki](https://github.com/dejanfajfar/epoch.net/wiki)
+- Create a (ticket)[https://github.com/dejanfajfar/epoch.net/issues] to help the project improve
