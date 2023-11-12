@@ -60,3 +60,5 @@ jobs:
           name: "Release ${{ steps.version.outputs.version }}"
           artifacts: "nupkgs/**/*.nupkg,CHANGELOG.md,LICENSE"
           generateReleaseNotes: true
+      - name: Publish NuGet Package
+        run: dotnet nuget push nupkgs/**/*.nupkg --source "https://api.nuget.org/v3/index.json" --api-key ${{secrets.NUGET_API_KEY}}
