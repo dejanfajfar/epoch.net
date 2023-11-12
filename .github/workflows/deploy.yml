@@ -49,12 +49,12 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
       - name: Pack
-        run: dotnet pack --output nupkgs -p:PackageVersion=${{ steps.version.outputs.version }} -p Configuration="Release"
+        run: dotnet pack --include-symbols --output nupkgs -p:PackageVersion=${{ steps.version.outputs.version }} -p Configuration="Release"
       - name: Publish Artifact
         uses: actions/upload-artifact@v2
         with:
           name: Package
-          path: nupkgs
+          path: nupkgs/**/*.nupkg
       - uses: ncipollo/release-action@v1
         with:
           name: "Release ${{ steps.version.outputs.version }}"
