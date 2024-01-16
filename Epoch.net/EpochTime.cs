@@ -50,7 +50,7 @@ public sealed class EpochTime
     /// Creates a new instance of <see cref="EpochTime"/> with a given rawEpoch
     /// </summary>
     /// <param name="rawEpoch">The number of seconds from 1970-01-01T00:00:00</param>
-    public EpochTime(int rawEpoch) => this.Epoch = rawEpoch;
+    public EpochTime(int rawEpoch) => Epoch = rawEpoch;
 
     /// <summary>
     /// Creates a new instance of <see cref="EpochTime"/> with the given <see cref="DateTime"/>
