@@ -9,3 +9,7 @@ packages
 
 *.nupkg
 Epoch.net.sln.DotSettings.user
+
+# Coverage reports
+TestResults/
+CoverageReport/
